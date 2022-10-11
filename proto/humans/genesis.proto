@@ -1,0 +1,14 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+import "gogoproto/gogo.proto";
+import "humans/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+// GenesisState defines the humans module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}
