@@ -1,6 +1,11 @@
 # humans
 **humans** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
 
+## Install proper ignite version (important)
+
+```
+sudo curl https://get.ignite.com/cli@v0.23.0! | sudo bash
+```
 ## Get started
 
 ```
