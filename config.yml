@@ -1,11 +1,11 @@
 accounts:
   - name: alice
-    coins: ["20000token", "200000000stake"]
+    coins: ["200000000uheart"]
   - name: bob
-    coins: ["10000token", "100000000stake"]
+    coins: ["100000000uheart"]
 validator:
   name: alice
-  staked: "100000000stake"
+  staked: "100000000uheart"
 client:
   openapi:
     path: "docs/static/openapi.yml"
@@ -13,4 +13,27 @@ client:
     path: "vue/src/store"
 faucet:
   name: bob
-  coins: ["5token", "100000stake"]
+  coins: ["5uheart"]
+genesis:
+  app_state:
+    bank:
+      denom_metadata:
+        - description: "The gas token of AI"
+          display: "heart"
+          base: "uheart"
+          name: "HeartToken"
+          symbol: "HEART"
+          denom_units:
+            - denom: "uheart"
+              aliases:
+                - "milliheart"
+              exponent: "0"
+            - denom: "mheart"
+              aliases:
+                - "microheart"
+              exponent: "3"
+            - denom: "heart"
+              exponent: "6"
+    staking:
+      params:
+        bond_denom: "uheart"
