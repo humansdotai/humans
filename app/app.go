@@ -407,6 +407,8 @@ func New(
 		keys[humansmoduletypes.StoreKey],
 		keys[humansmoduletypes.MemStoreKey],
 		app.GetSubspace(humansmoduletypes.ModuleName),
+
+		app.BankKeeper,
 	)
 	humansModule := humansmodule.NewAppModule(appCodec, app.HumansKeeper, app.AccountKeeper, app.BankKeeper)
 

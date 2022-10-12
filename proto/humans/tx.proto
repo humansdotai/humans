@@ -7,7 +7,110 @@ option go_package = "github.com/humansdotai/humans/x/humans/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+  rpc RequestTransaction(MsgRequestTransaction) returns (MsgRequestTransactionResponse);
+  rpc ObservationVote(MsgObservationVote) returns (MsgObservationVoteResponse);
+  rpc UpdateBalance(MsgUpdateBalance) returns (MsgUpdateBalanceResponse);
+  rpc ApproveTransaction(MsgApproveTransaction) returns (MsgApproveTransactionResponse);
+  rpc TransferPoolcoin(MsgTransferPoolcoin) returns (MsgTransferPoolcoinResponse);
+  rpc AddWhitelisted(MsgAddWhitelisted) returns (MsgAddWhitelistedResponse);
+  rpc SetAdmin(MsgSetAdmin) returns (MsgSetAdminResponse);
+  rpc KeysignVote(MsgKeysignVote) returns (MsgKeysignVoteResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgRequestTransaction {
+  string creator = 1;
+  string originChain = 2;
+  string originAddress = 3;
+  string targetChain = 4;
+  string targetAddress = 5;
+  string amount = 6;
+  string fee = 7;
+}
+
+message MsgRequestTransactionResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgObservationVote {
+  string creator = 1;
+  string txHash = 2;
+  string chainName = 3;
+  string from = 4;
+  string to = 5;
+  string amount = 6;
+}
+
+message MsgObservationVoteResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgUpdateBalance {
+  string creator = 1;
+  string chainName = 2;
+  string balance = 3;
+  string decimal = 4;
+}
+
+message MsgUpdateBalanceResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgApproveTransaction {
+  string creator = 1;
+  string txHash = 2;
+  string success = 3;
+  string signedKey = 4;
+}
+
+message MsgApproveTransactionResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgTransferPoolcoin {
+  string creator = 1;
+  string addr = 2;
+  string pool = 3;
+  string amt = 4;
+}
+
+message MsgTransferPoolcoinResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgAddWhitelisted {
+  string creator = 1;
+  string address = 2;
+}
+
+message MsgAddWhitelistedResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgSetAdmin {
+  string creator = 1;
+}
+
+message MsgSetAdminResponse {
+  string code = 1;
+  string msg = 2;
+}
+
+message MsgKeysignVote {
+  string creator = 1;
+  string txHash = 2;
+  string pubKey = 3;
+}
+
+message MsgKeysignVoteResponse {
+  string code = 1;
+  string msg = 2;
 }
 
 // this line is used by starport scaffolding # proto/tx/message

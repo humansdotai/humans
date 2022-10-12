@@ -1,0 +1,11 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+message Superadmin {
+  string index = 1; 
+  string address = 2; 
+  
+}
+

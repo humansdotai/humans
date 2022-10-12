@@ -1,0 +1,14 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+message Pubkeys {
+  string index = 1; 
+  string moniker = 2; 
+  string pubkey = 3; 
+  string issigner = 4; 
+  string timeat = 5; 
+  
+}
+

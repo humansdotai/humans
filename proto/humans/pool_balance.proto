@@ -1,0 +1,13 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+message PoolBalance {
+  string index = 1; 
+  string chainName = 2; 
+  string balance = 3; 
+  string decimal = 4; 
+  
+}
+

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+message ObserveVote {
+  string index = 1; 
+  string creator = 2; 
+  string txhash = 3; 
+  string from = 4; 
+  string to = 5; 
+  string amount = 6; 
+  string txtime = 7; 
+  string chainId = 8; 
+  string used = 9; 
+  
+}
+
