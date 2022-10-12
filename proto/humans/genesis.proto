@@ -3,6 +3,14 @@ package humansdotai.humans.humans;
 
 import "gogoproto/gogo.proto";
 import "humans/params.proto";
+import "humans/fee_balance.proto";
+import "humans/keysign_vote_data.proto";
+import "humans/observe_vote.proto";
+import "humans/pool_balance.proto";
+import "humans/pubkeys.proto";
+import "humans/superadmin.proto";
+import "humans/transaction_data.proto";
+import "humans/whitelisted_node.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/humansdotai/humans/x/humans/types";
@@ -10,5 +18,13 @@ option go_package = "github.com/humansdotai/humans/x/humans/types";
 // GenesisState defines the humans module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated FeeBalance feeBalanceList = 2 [(gogoproto.nullable) = false];
+  repeated KeysignVoteData keysignVoteDataList = 3 [(gogoproto.nullable) = false];
+  repeated ObserveVote observeVoteList = 4 [(gogoproto.nullable) = false];
+  repeated PoolBalance poolBalanceList = 5 [(gogoproto.nullable) = false];
+  repeated Pubkeys pubkeysList = 6 [(gogoproto.nullable) = false];
+  repeated Superadmin superadminList = 7 [(gogoproto.nullable) = false];
+  repeated TransactionData transactionDataList = 8 [(gogoproto.nullable) = false];
+  repeated WhitelistedNode whitelistedNodeList = 9 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

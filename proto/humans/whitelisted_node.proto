@@ -1,0 +1,14 @@
+syntax = "proto3";
+package humansdotai.humans.humans;
+
+option go_package = "github.com/humansdotai/humans/x/humans/types";
+
+message WhitelistedNode {
+  string index = 1; 
+  string nodeaddr = 2; 
+  string walletaddr = 3; 
+  string pubkey = 4; 
+  string fee = 5; 
+  
+}
+
