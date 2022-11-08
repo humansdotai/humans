@@ -1,12 +1,14 @@
 version: 1
 accounts:
   - name: alice
-    coins: ["20000token", "200000000stake"]
+    coins: ["2000000000000uheart"]
   - name: bob
-    coins: ["10000token", "100000000stake"]
+    coins: ["1000000000000uheart"]
 validators:
   - name: alice
-    bonded: "100000000stake"
+    bonded: "100000000uheart"
+  - name: bob
+    bonded: "100000000uheart"
 client:
   openapi:
     path: "docs/static/openapi.yml"
@@ -16,4 +18,63 @@ client:
     path: "vue/src/store"
 faucet:
   name: bob
-  coins: ["5token", "100000stake"]
+  coins: ["100000uheart"]
+genesis:
+  app_state:
+    bank:
+      denom_metadata:
+        - base: uheart
+          denom_units:
+            - aliases:
+                - milliheart
+              denom: uheart
+              exponent: "0"
+            - aliases:
+                - microheart
+              denom: mheart
+              exponent: "3"
+            - denom: heart
+              exponent: "6"
+          description: The gas token of AI
+          display: heart
+          name: HeartToken
+          symbol: HEART
+    mint:
+      minter:
+        inflation: '0.070000000000000000'
+        annual_provisions: '0.000000000000000000'
+      params:
+        mint_denom: uheart
+        inflation_rate_change: '0.5'
+        inflation_max: '0.115000000000000000'
+        inflation_min: '0.070000000000000000'
+        goal_bonded: '0.670000000000000000'
+        blocks_per_year: '6311520'
+    gov:
+      starting_proposal_id: '1'
+      deposits: null
+      votes: null
+      proposals: null
+      deposit_params:
+        min_deposit:
+          - denom: uatom
+            amount: '2500000000000'
+        max_deposit_period: '48h'
+      voting_params:
+        voting_period: '72h'
+      tally_params:
+        quorum: '0.33'
+        threshold: '0.5'
+    slashing:
+      params:
+        signed_blocks_window: '30000'
+        min_signed_per_window: '0.050000000000000000'
+        downtime_jail_duration: '10m'
+        slash_fraction_double_sign: '0.050000000000000000'
+        slash_fraction_downtime: '0.000100000000000000'
+    staking:
+      params:
+        unbonding_time: '336h'
+        max_validators: 50
+        max_entries: 7
+        bond_denom: uheart
