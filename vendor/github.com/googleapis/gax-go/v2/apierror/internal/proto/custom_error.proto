@@ -18,7 +18,6 @@ package error;
 
 option go_package = "github.com/googleapis/gax-go/v2/apierror/internal/proto;jsonerror";
 
-
 // CustomError is an example of a custom error message  which may be included
 // in an rpc status. It is not meant to reflect a standard error.
 message CustomError {
@@ -36,7 +35,6 @@ message CustomError {
 
     // Catastrophic error.
     UNIVERSE_WAS_DESTROYED = 3;
-
   }
 
   // Error code specific to the custom API being invoked.

@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  title: Ethermint Chain - Legacy REST and gRPC Gateway docs
+  title: Humans Chain - Legacy REST and gRPC Gateway docs
   description: A REST interface for state queries, legacy transactions
   version: 1.0.0
 paths:
-  /ethermint/evm/v1/account/{address}:
+  /humans/evm/v1/account/{address}:
     get:
       summary: Account queries an Ethereum account.
       operationId: Account
@@ -227,7 +227,7 @@ paths:
           type: string
       tags:
         - Query
-  /ethermint/evm/v1/balances/{address}:
+  /humans/evm/v1/balances/{address}:
     get:
       summary: |-
         Balance queries the balance of a the EVM denomination for a single
@@ -445,7 +445,7 @@ paths:
           type: string
       tags:
         - Query
-  /ethermint/evm/v1/base_fee:
+  /humans/evm/v1/base_fee:
     get:
       summary: >-
         BaseFee queries the base fee of the parent block of the current block,
@@ -656,7 +656,7 @@ paths:
                         }
       tags:
         - Query
-  /ethermint/evm/v1/codes/{address}:
+  /humans/evm/v1/codes/{address}:
     get:
       summary: Code queries the balance of all coins for a single account.
       operationId: Code
@@ -873,7 +873,7 @@ paths:
           type: string
       tags:
         - Query
-  /ethermint/evm/v1/cosmos_account/{address}:
+  /humans/evm/v1/cosmos_account/{address}:
     get:
       summary: CosmosAccount queries an Ethereum account's Cosmos Address.
       operationId: CosmosAccount
@@ -1099,7 +1099,7 @@ paths:
           type: string
       tags:
         - Query
-  /ethermint/evm/v1/estimate_gas:
+  /humans/evm/v1/estimate_gas:
     get:
       summary: EstimateGas implements the `eth_estimateGas` rpc api
       operationId: EstimateGas
@@ -1333,7 +1333,7 @@ paths:
           format: int64
       tags:
         - Query
-  /ethermint/evm/v1/eth_call:
+  /humans/evm/v1/eth_call:
     get:
       summary: EthCall implements the `eth_call` rpc api
       operationId: EthCall
@@ -1646,7 +1646,7 @@ paths:
           format: int64
       tags:
         - Query
-  /ethermint/evm/v1/params:
+  /humans/evm/v1/params:
     get:
       summary: Params queries the parameters of x/evm module.
       operationId: EvmParams
@@ -1978,7 +1978,7 @@ paths:
                         }
       tags:
         - Query
-  /ethermint/evm/v1/storage/{address}/{key}:
+  /humans/evm/v1/storage/{address}/{key}:
     get:
       summary: Storage queries the balance of all coins for a single account.
       operationId: Storage
@@ -2205,7 +2205,7 @@ paths:
           type: string
       tags:
         - Query
-  /ethermint/evm/v1/trace_block:
+  /humans/evm/v1/trace_block:
     get:
       summary: >-
         TraceBlock implements the `debug_traceBlockByNumber` and
@@ -2598,7 +2598,7 @@ paths:
           format: int64
       tags:
         - Query
-  /ethermint/evm/v1/trace_tx:
+  /humans/evm/v1/trace_tx:
     get:
       summary: TraceTx implements the `debug_traceTransaction` rpc api
       operationId: TraceTx
@@ -3069,7 +3069,7 @@ paths:
           format: int64
       tags:
         - Query
-  /ethermint/evm/v1/validator_account/{cons_address}:
+  /humans/evm/v1/validator_account/{cons_address}:
     get:
       summary: >-
         ValidatorAccount queries an Ethereum account's from a validator
@@ -3300,7 +3300,7 @@ paths:
       tags:
         - Query
 definitions:
-  ethermint.evm.v1.ChainConfig:
+  humans.evm.v1.ChainConfig:
     type: object
     properties:
       homestead_block:
@@ -3371,7 +3371,7 @@ definitions:
       values
 
       instead of *big.Int.
-  ethermint.evm.v1.EstimateGasResponse:
+  humans.evm.v1.EstimateGasResponse:
     type: object
     properties:
       gas:
@@ -3379,7 +3379,7 @@ definitions:
         format: uint64
         title: the estimated gas
     title: EstimateGasResponse defines EstimateGas response
-  ethermint.evm.v1.Log:
+  humans.evm.v1.Log:
     type: object
     properties:
       address:
@@ -3428,7 +3428,7 @@ definitions:
       by
 
       the node.
-  ethermint.evm.v1.MsgEthereumTx:
+  humans.evm.v1.MsgEthereumTx:
     type: object
     properties:
       data:
@@ -3608,7 +3608,7 @@ definitions:
           against the address derived from the signature (V, R, S) using the
           secp256k1 elliptic curve
     description: MsgEthereumTx encapsulates an Ethereum transaction as an SDK message.
-  ethermint.evm.v1.MsgEthereumTxResponse:
+  humans.evm.v1.MsgEthereumTxResponse:
     type: object
     properties:
       hash:
@@ -3687,7 +3687,7 @@ definitions:
         format: uint64
         title: gas consumed by the transaction
     description: MsgEthereumTxResponse defines the Msg/EthereumTx response type.
-  ethermint.evm.v1.Params:
+  humans.evm.v1.Params:
     type: object
     properties:
       evm_denom:
@@ -3789,7 +3789,7 @@ definitions:
 
           signed) transactions can be executed on the state machine.
     title: Params defines the EVM module parameters
-  ethermint.evm.v1.QueryAccountResponse:
+  humans.evm.v1.QueryAccountResponse:
     type: object
     properties:
       balance:
@@ -3805,7 +3805,7 @@ definitions:
     description: >-
       QueryAccountResponse is the response type for the Query/Account RPC
       method.
-  ethermint.evm.v1.QueryBalanceResponse:
+  humans.evm.v1.QueryBalanceResponse:
     type: object
     properties:
       balance:
@@ -3814,13 +3814,13 @@ definitions:
     description: >-
       QueryBalanceResponse is the response type for the Query/Balance RPC
       method.
-  ethermint.evm.v1.QueryBaseFeeResponse:
+  humans.evm.v1.QueryBaseFeeResponse:
     type: object
     properties:
       base_fee:
         type: string
     description: BaseFeeResponse returns the EIP1559 base fee.
-  ethermint.evm.v1.QueryCodeResponse:
+  humans.evm.v1.QueryCodeResponse:
     type: object
     properties:
       code:
@@ -3830,7 +3830,7 @@ definitions:
     description: |-
       QueryCodeResponse is the response type for the Query/Code RPC
       method.
-  ethermint.evm.v1.QueryCosmosAccountResponse:
+  humans.evm.v1.QueryCosmosAccountResponse:
     type: object
     properties:
       cosmos_address:
@@ -3849,7 +3849,7 @@ definitions:
       Query/CosmosAccount
 
       RPC method.
-  ethermint.evm.v1.QueryParamsResponse:
+  humans.evm.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -3964,7 +3964,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/evm
       parameters.
-  ethermint.evm.v1.QueryStorageResponse:
+  humans.evm.v1.QueryStorageResponse:
     type: object
     properties:
       value:
@@ -3975,14 +3975,14 @@ definitions:
     description: |-
       QueryStorageResponse is the response type for the Query/Storage RPC
       method.
-  ethermint.evm.v1.QueryTraceBlockResponse:
+  humans.evm.v1.QueryTraceBlockResponse:
     type: object
     properties:
       data:
         type: string
         format: byte
     title: QueryTraceBlockResponse defines TraceBlock response
-  ethermint.evm.v1.QueryTraceTxResponse:
+  humans.evm.v1.QueryTraceTxResponse:
     type: object
     properties:
       data:
@@ -3990,7 +3990,7 @@ definitions:
         format: byte
         title: response serialized in bytes
     title: QueryTraceTxResponse defines TraceTx response
-  ethermint.evm.v1.QueryValidatorAccountResponse:
+  humans.evm.v1.QueryValidatorAccountResponse:
     type: object
     properties:
       account_address:
@@ -4007,7 +4007,7 @@ definitions:
     description: |-
       QueryValidatorAccountResponse is the response type for the
       Query/ValidatorAccount RPC method.
-  ethermint.evm.v1.TraceConfig:
+  humans.evm.v1.TraceConfig:
     type: object
     properties:
       tracer:

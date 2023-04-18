@@ -5,7 +5,7 @@ from eth_abi import abi
 from hexbytes import HexBytes
 from web3 import Web3
 
-from .network import setup_custom_ethermint, setup_ethermint
+from .network import setup_custom_humans, setup_humans
 from .utils import (
     ADDRS,
     CONTRACTS,
@@ -17,37 +17,37 @@ from .utils import (
 
 
 @pytest.fixture(scope="module")
-def custom_ethermint(tmp_path_factory):
+def custom_humans(tmp_path_factory):
     path = tmp_path_factory.mktemp("filters")
-    yield from setup_ethermint(path, 26200, long_timeout_commit=True)
+    yield from setup_humans(path, 26200, long_timeout_commit=True)
 
 
 @pytest.fixture(scope="module")
-def ethermint_indexer(tmp_path_factory):
+def humans_indexer(tmp_path_factory):
     path = tmp_path_factory.mktemp("indexer")
-    yield from setup_custom_ethermint(
+    yield from setup_custom_humans(
         path, 26660, Path(__file__).parent / "configs/enable-indexer.jsonnet"
     )
 
 
 @pytest.fixture(
-    scope="module", params=["ethermint", "geth", "ethermint-ws", "enable-indexer"]
+    scope="module", params=["humans", "geth", "humans-ws", "enable-indexer"]
 )
-def cluster(request, custom_ethermint, ethermint_indexer, geth):
+def cluster(request, custom_humans, humans_indexer, geth):
     """
-    run on both ethermint and geth
+    run on both humans and geth
     """
     provider = request.param
-    if provider == "ethermint":
-        yield custom_ethermint
+    if provider == "humans":
+        yield custom_humans
     elif provider == "geth":
         yield geth
-    elif provider == "ethermint-ws":
-        ethermint_ws = custom_ethermint.copy()
-        ethermint_ws.use_websocket()
-        yield ethermint_ws
+    elif provider == "humans-ws":
+        humans_ws = custom_humans.copy()
+        humans_ws.use_websocket()
+        yield humans_ws
     elif provider == "enable-indexer":
-        yield ethermint_indexer
+        yield humans_indexer
     else:
         raise NotImplementedError
 

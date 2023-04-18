@@ -8,7 +8,7 @@ import pytest
 import requests
 from pystarport import ports
 
-from .network import setup_custom_ethermint
+from .network import setup_custom_humans
 from .utils import (
     CONTRACTS,
     decode_bech32,
@@ -20,11 +20,11 @@ from .utils import (
 
 
 @pytest.fixture(scope="module")
-def custom_ethermint(tmp_path_factory):
+def custom_humans(tmp_path_factory):
     path = tmp_path_factory.mktemp("grpc-only")
 
     # reuse rollback-test config because it has an extra fullnode
-    yield from setup_custom_ethermint(
+    yield from setup_custom_humans(
         path,
         26400,
         Path(__file__).parent / "configs/rollback-test.jsonnet",
@@ -43,16 +43,16 @@ def grpc_eth_call(port: int, args: dict, chain_id=None, proposer_address=None):
     if proposer_address is not None:
         params["proposer_address"] = str(proposer_address)
     return requests.get(
-        f"http://localhost:{port}/ethermint/evm/v1/eth_call", params
+        f"http://localhost:{port}/humans/evm/v1/eth_call", params
     ).json()
 
 
-def test_grpc_mode(custom_ethermint):
+def test_grpc_mode(custom_humans):
     """
     - restart a fullnode in grpc-only mode
     - test the grpc queries all works
     """
-    w3 = custom_ethermint.w3
+    w3 = custom_humans.w3
     contract, _ = deploy_contract(w3, CONTRACTS["TestChainID"])
     assert 9000 == contract.caller.currentChainID()
 
@@ -60,7 +60,7 @@ def test_grpc_mode(custom_ethermint):
         "to": contract.address,
         "data": contract.encodeABI(fn_name="currentChainID"),
     }
-    api_port = ports.api_port(custom_ethermint.base_port(1))
+    api_port = ports.api_port(custom_humans.base_port(1))
     # in normal mode, grpc query works even if we don't pass chain_id explicitly
     success = False
     max_retry = 3
@@ -76,27 +76,27 @@ def test_grpc_mode(custom_ethermint):
     assert success
     # wait 1 more block for both nodes to avoid node stopped before tnx get included
     for i in range(2):
-        wait_for_block(custom_ethermint.cosmos_cli(i), 1)
+        wait_for_block(custom_humans.cosmos_cli(i), 1)
     supervisorctl(
-        custom_ethermint.base_dir / "../tasks.ini", "stop", "ethermint_9000-1-node1"
+        custom_humans.base_dir / "../tasks.ini", "stop", "humans_9000-1-node1"
     )
 
     # run grpc-only mode directly with existing chain state
-    with (custom_ethermint.base_dir / "node1.log").open("a") as logfile:
+    with (custom_humans.base_dir / "node1.log").open("a") as logfile:
         proc = subprocess.Popen(
             [
-                "ethermintd",
+                "humansd",
                 "start",
                 "--grpc-only",
                 "--home",
-                custom_ethermint.base_dir / "node1",
+                custom_humans.base_dir / "node1",
             ],
             stdout=logfile,
             stderr=subprocess.STDOUT,
         )
         try:
             # wait for grpc and rest api ports
-            grpc_port = ports.grpc_port(custom_ethermint.base_port(1))
+            grpc_port = ports.grpc_port(custom_humans.base_port(1))
             wait_for_port(grpc_port)
             wait_for_port(api_port)
 
@@ -111,7 +111,7 @@ def test_grpc_mode(custom_ethermint):
             assert "validator does not exist" in rsp["message"]
 
             # pass the first validator's consensus address to grpc query
-            addr = custom_ethermint.cosmos_cli(0).consensus_address()
+            addr = custom_humans.cosmos_cli(0).consensus_address()
             cons_addr = decode_bech32(addr)
 
             # should work with both chain_id and proposer_address set

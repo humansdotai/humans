@@ -9,9 +9,9 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/evmos/ethermint/x/evm/keeper"
-	"github.com/evmos/ethermint/x/evm/statedb"
-	"github.com/evmos/ethermint/x/evm/types"
+	"github.com/0x4139/humans/x/evm/keeper"
+	"github.com/0x4139/humans/x/evm/statedb"
+	"github.com/0x4139/humans/x/evm/types"
 )
 
 // LogRecordHook records all the logs

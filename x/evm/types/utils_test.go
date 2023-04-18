@@ -9,12 +9,12 @@ import (
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
-	"github.com/evmos/ethermint/app"
-	"github.com/evmos/ethermint/encoding"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
+	"github.com/0x4139/humans/app"
+	"github.com/0x4139/humans/encoding"
+	evmtypes "github.com/0x4139/humans/x/evm/types"
 	proto "github.com/gogo/protobuf/proto"
 
-	"github.com/evmos/ethermint/tests"
+	"github.com/0x4139/humans/tests"
 
 	"github.com/stretchr/testify/require"
 

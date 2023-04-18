@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/evmos/ethermint/server/config"
+	"github.com/0x4139/humans/server/config"
 	"github.com/gorilla/mux"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/spf13/cobra"

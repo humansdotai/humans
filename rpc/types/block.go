@@ -17,7 +17,7 @@ import (
 
 	grpctypes "github.com/cosmos/cosmos-sdk/types/grpc"
 
-	ethermint "github.com/evmos/ethermint/types"
+	humans "github.com/0x4139/humans/types"
 )
 
 // BlockNumber represents decoding hex string to block values
@@ -183,7 +183,7 @@ func (bnh *BlockNumberOrHash) decodeFromString(input string) error {
 			return err
 		}
 
-		bnInt, err := ethermint.SafeInt64(blockNumber)
+		bnInt, err := humans.SafeInt64(blockNumber)
 		if err != nil {
 			return err
 		}

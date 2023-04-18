@@ -19,7 +19,7 @@ var (
 
 const (
 	// Amino names
-	updateParamsName = "ethermint/feemarket/MsgUpdateParams"
+	updateParamsName = "humans/feemarket/MsgUpdateParams"
 )
 
 // NOTE: This is required for the GetSignBytes function

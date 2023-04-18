@@ -1,11 +1,11 @@
 { pkgs
 , config
-, ethermint ? (import ../. { inherit pkgs; })
+, humans ? (import ../. { inherit pkgs; })
 }: rec {
-  start-ethermint = pkgs.writeShellScriptBin "start-ethermint" ''
-    # rely on environment to provide ethermintd
+  start-humans = pkgs.writeShellScriptBin "start-humans" ''
+    # rely on environment to provide humansd
     export PATH=${pkgs.test-env}/bin:$PATH
-    ${../scripts/start-ethermint.sh} ${config.ethermint-config} ${config.dotenv} $@
+    ${../scripts/start-humans.sh} ${config.humans-config} ${config.dotenv} $@
   '';
   start-geth = pkgs.writeShellScriptBin "start-geth" ''
     export PATH=${pkgs.test-env}/bin:${pkgs.go-ethereum}/bin:$PATH
@@ -14,6 +14,6 @@
   '';
   start-scripts = pkgs.symlinkJoin {
     name = "start-scripts";
-    paths = [ start-ethermint start-geth ];
+    paths = [ start-humans start-geth ];
   };
 }

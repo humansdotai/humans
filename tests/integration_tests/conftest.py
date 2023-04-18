@@ -1,12 +1,12 @@
 import pytest
 
-from .network import setup_ethermint, setup_geth
+from .network import setup_humans, setup_geth
 
 
 @pytest.fixture(scope="session")
-def ethermint(tmp_path_factory):
-    path = tmp_path_factory.mktemp("ethermint")
-    yield from setup_ethermint(path, 26650)
+def humans(tmp_path_factory):
+    path = tmp_path_factory.mktemp("humans")
+    yield from setup_humans(path, 26650)
 
 
 @pytest.fixture(scope="session")
@@ -16,18 +16,18 @@ def geth(tmp_path_factory):
 
 
 @pytest.fixture(
-    scope="session", params=["ethermint", "ethermint-ws"]
+    scope="session", params=["humans", "humans-ws"]
 )
-def ethermint_rpc_ws(request, ethermint):
+def humans_rpc_ws(request, humans):
     """
-    run on both ethermint and ethermint websocket
+    run on both humans and humans websocket
     """
     provider = request.param
-    if provider == "ethermint":
-        yield ethermint
-    elif provider == "ethermint-ws":
-        ethermint_ws = ethermint.copy()
-        ethermint_ws.use_websocket()
-        yield ethermint_ws
+    if provider == "humans":
+        yield humans
+    elif provider == "humans-ws":
+        humans_ws = humans.copy()
+        humans_ws.use_websocket()
+        yield humans_ws
     else:
         raise NotImplementedError

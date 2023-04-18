@@ -1,7 +1,7 @@
-// This is a test utility for Ethermint's Web3 JSON-RPC services.
+// This is a test utility for Humans's Web3 JSON-RPC services.
 //
-// To run these tests please first ensure you have the ethermintd running
-// and have started the RPC service with `ethermintd rest-server`.
+// To run these tests please first ensure you have the humansd running
+// and have started the RPC service with `humansd rest-server`.
 //
 // You can configure the desired HOST and MODE as well
 package rpc
@@ -17,9 +17,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	rpctypes "github.com/evmos/ethermint/rpc/types"
-	ethermint "github.com/evmos/ethermint/types"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
+	rpctypes "github.com/0x4139/humans/rpc/types"
+	humans "github.com/0x4139/humans/types"
+	evmtypes "github.com/0x4139/humans/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -136,7 +136,7 @@ func callWithError(method string, params interface{}) (*Response, error) {
 }
 
 func TestEth_protocolVersion(t *testing.T) {
-	expectedRes := hexutil.Uint(ethermint.ProtocolVersion)
+	expectedRes := hexutil.Uint(humans.ProtocolVersion)
 
 	rpcRes := call(t, "eth_protocolVersion", []string{})
 

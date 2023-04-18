@@ -5,21 +5,21 @@ import (
 	"math/big"
 	"strconv"
 
+	rpctypes "github.com/0x4139/humans/rpc/types"
+	humans "github.com/0x4139/humans/types"
+	evmtypes "github.com/0x4139/humans/x/evm/types"
+	feemarkettypes "github.com/0x4139/humans/x/feemarket/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
-	rpctypes "github.com/evmos/ethermint/rpc/types"
-	ethermint "github.com/evmos/ethermint/types"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
-	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 )
 
 // ChainID is the EIP-155 replay-protection chain id for the current ethereum chain config.
 func (b *Backend) ChainID() (*hexutil.Big, error) {
-	eip155ChainID, err := ethermint.ParseChainID(b.clientCtx.ChainID)
+	eip155ChainID, err := humans.ParseChainID(b.clientCtx.ChainID)
 	if err != nil {
 		panic(err)
 	}

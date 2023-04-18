@@ -9,9 +9,9 @@ from .utils import (
 )
 
 
-def test_trace_blk(ethermint):
-    w3 = ethermint.w3
-    cli = ethermint.cosmos_cli()
+def test_trace_blk(humans):
+    w3 = humans.w3
+    cli = humans.cosmos_cli()
     acc = derive_new_account(3)
     sender = acc.address
     # fund new sender
@@ -39,7 +39,7 @@ def test_trace_blk(ethermint):
         res = w3.eth.wait_for_transaction_receipt(txhash)
         assert res.status == 1
 
-    url = f"http://127.0.0.1:{ports.evmrpc_port(ethermint.base_port(0))}"
+    url = f"http://127.0.0.1:{ports.evmrpc_port(humans.base_port(0))}"
     params = {
         "method": "debug_traceBlockByNumber",
         "params": [hex(blk + 1)],

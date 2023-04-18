@@ -1,4 +1,4 @@
-module github.com/evmos/ethermint
+module github.com/0x4139/humans
 
 go 1.19
 

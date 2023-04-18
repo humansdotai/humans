@@ -5,7 +5,7 @@ import requests
 from dateutil.parser import isoparse
 from pystarport.utils import build_cli_args_safe, interact
 
-DEFAULT_GAS_PRICE = "5000000000000aphoton"
+DEFAULT_GAS_PRICE = "5000000000000aheart"
 DEFAULT_GAS = "250000"
 
 
@@ -140,7 +140,7 @@ class CosmosCLI:
             self.raw("query", "bank", "balances", addr, home=self.data_dir)
         )["balances"]
 
-    def balance(self, addr, denom="aphoton"):
+    def balance(self, addr, denom="aheart"):
         denoms = {coin["denom"]: int(coin["amount"]) for coin in self.balances(addr)}
         return denoms.get(denom, 0)
 
@@ -476,7 +476,7 @@ class CosmosCLI:
         if max_priority_price is not None:
             tx["body"]["extension_options"].append(
                 {
-                    "@type": "/ethermint.types.v1.ExtensionOptionDynamicFeeTx",
+                    "@type": "/humans.types.v1.ExtensionOptionDynamicFeeTx",
                     "max_priority_price": str(max_priority_price),
                 }
             )

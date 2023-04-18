@@ -43,7 +43,7 @@ Once the vulnerability severity is defined, the following steps apply:
     1. Patches are prepared for supported releases of Evmos in a [temporary private fork](https://docs.github.com/en/code-security/repository-security-advisories/collaborating-in-a-temporary-private-fork-to-resolve-a-repository-security-vulnerability) of the repository.
     2. Only relevant parties will be notified about an upcoming upgrade. These being validators, the core developer team, and users directly affected by the vulnerability.
     3. 24 hours following this notification, relevant releases with the patch will be made public.
-    4. The nodes and validators update their Evmos and Ethermint dependencies to use these releases.
+    4. The nodes and validators update their Evmos and Humans dependencies to use these releases.
     5. A week (or less) after the security vulnerability has been patched on Evmos, we will disclose that the mentioned release contained a security fix.
     6. After an additional 2 weeks, we will publish a public announcement of the vulnerability. We also publish a security Advisory on GitHub and publish a [CVE](https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures)
 
@@ -51,7 +51,7 @@ Once the vulnerability severity is defined, the following steps apply:
     1. `Medium` and `Low` severity bug reports are included in a public issue and will be incorporated in the current sprint and patched in the next release. `Informational` reports are additionally categorized as with low or medium priority and might not be included in the next release.
     2. One week after the releases go out, we will publish a post with further details on the vulnerability as well as our response to it.
 
-This process can take some time. Every effort will be made to handle the bug in as timely a manner as possible, however, it's important that we follow the process described above to ensure that disclosures are handled consistently and to keep Ethermint and its downstream dependent projects, including but not limited to Evmos, as secure as possible.
+This process can take some time. Every effort will be made to handle the bug in as timely a manner as possible, however, it's important that we follow the process described above to ensure that disclosures are handled consistently and to keep Humans and its downstream dependent projects, including but not limited to Evmos, as secure as possible.
 
 ### Payment Process
 

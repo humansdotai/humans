@@ -16,8 +16,8 @@ from .utils import (
 )
 
 
-def test_tracers(ethermint_rpc_ws):
-    w3: Web3 = ethermint_rpc_ws.w3
+def test_tracers(humans_rpc_ws):
+    w3: Web3 = humans_rpc_ws.w3
     eth_rpc = w3.provider
     gas_price = w3.eth.gas_price
     tx = {"to": ADDRS["community"], "value": 100, "gasPrice": gas_price}

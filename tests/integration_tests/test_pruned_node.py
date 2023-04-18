@@ -6,7 +6,7 @@ from eth_utils import abi, big_endian_to_int
 from hexbytes import HexBytes
 from web3.datastructures import AttributeDict
 
-from .network import setup_custom_ethermint
+from .network import setup_custom_humans
 from .utils import (
     ADDRS,
     CONTRACTS,
@@ -22,7 +22,7 @@ def pruned(request, tmp_path_factory):
     """start-cronos
     params: enable_auto_deployment
     """
-    yield from setup_custom_ethermint(
+    yield from setup_custom_humans(
         tmp_path_factory.mktemp("pruned"),
         26900,
         Path(__file__).parent / "configs/pruned_node.jsonnet",

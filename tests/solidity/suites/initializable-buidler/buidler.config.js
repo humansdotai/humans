@@ -12,7 +12,7 @@ module.exports = {
       gasPrice: 1000000000,  // 1 gwei (in wei)
       defaultBalanceEther: 100
     },
-    ethermint: {
+    humans: {
       url: 'http://localhost:8545',
       gasLimit: 5000000,     // Gas sent with each transaction
       gasPrice: 1000000000,  // 1 gwei (in wei)

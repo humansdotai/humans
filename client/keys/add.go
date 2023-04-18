@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sort"
 
-	etherminthd "github.com/evmos/ethermint/crypto/hd"
+	humanshd "github.com/0x4139/humans/crypto/hd"
 
 	bip39 "github.com/cosmos/go-bip39"
 	"github.com/spf13/cobra"
@@ -82,7 +82,7 @@ func RunAddCmd(ctx client.Context, cmd *cobra.Command, args []string, inBuf *buf
 
 	if dryRun, _ := cmd.Flags().GetBool(flags.FlagDryRun); dryRun {
 		// use in memory keybase
-		kb = keyring.NewInMemory(ctx.Codec, etherminthd.EthSecp256k1Option())
+		kb = keyring.NewInMemory(ctx.Codec, humanshd.EthSecp256k1Option())
 	} else {
 		_, err = kb.Key(name)
 		if err == nil {

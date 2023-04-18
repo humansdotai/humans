@@ -1,28 +1,28 @@
 import pytest
 from web3 import Web3
 
-from .network import setup_ethermint
+from .network import setup_humans
 from .utils import ADDRS, derive_new_account, w3_wait_for_new_blocks
 
 
 @pytest.fixture(scope="module")
-def custom_ethermint(tmp_path_factory):
+def custom_humans(tmp_path_factory):
     path = tmp_path_factory.mktemp("account")
-    yield from setup_ethermint(path, 26700, long_timeout_commit=True)
+    yield from setup_humans(path, 26700, long_timeout_commit=True)
 
 
-@pytest.fixture(scope="module", params=["ethermint", "ethermint-ws", "geth"])
-def cluster(request, custom_ethermint, geth):
+@pytest.fixture(scope="module", params=["humans", "humans-ws", "geth"])
+def cluster(request, custom_humans, geth):
     """
-    run on ethermint, ethermint websocket and geth
+    run on humans, humans websocket and geth
     """
     provider = request.param
-    if provider == "ethermint":
-        yield custom_ethermint
-    elif provider == "ethermint-ws":
-        ethermint_ws = custom_ethermint.copy()
-        ethermint_ws.use_websocket()
-        yield ethermint_ws
+    if provider == "humans":
+        yield custom_humans
+    elif provider == "humans-ws":
+        humans_ws = custom_humans.copy()
+        humans_ws.use_websocket()
+        yield humans_ws
     elif provider == "geth":
         yield geth
     else:

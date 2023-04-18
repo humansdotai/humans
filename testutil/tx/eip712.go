@@ -7,22 +7,22 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 
+	cryptocodec "github.com/0x4139/humans/crypto/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	cryptocodec "github.com/evmos/ethermint/crypto/codec"
 
+	"github.com/0x4139/humans/ethereum/eip712"
 	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
-	"github.com/evmos/ethermint/ethereum/eip712"
 
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 
-	"github.com/evmos/ethermint/types"
+	"github.com/0x4139/humans/types"
 
-	"github.com/evmos/ethermint/app"
+	"github.com/0x4139/humans/app"
 )
 
 type EIP712TxArgs struct {
@@ -55,12 +55,12 @@ type signatureV2Args struct {
 // It returns the signed transaction and an error
 func CreateEIP712CosmosTx(
 	ctx sdk.Context,
-	appEthermint *app.EthermintApp,
+	appHumans *app.HumansApp,
 	args EIP712TxArgs,
 ) (sdk.Tx, error) {
 	builder, err := PrepareEIP712CosmosTx(
 		ctx,
-		appEthermint,
+		appHumans,
 		args,
 	)
 	return builder.GetTx(), err
@@ -71,7 +71,7 @@ func CreateEIP712CosmosTx(
 // It returns the tx builder with the signed transaction and an error
 func PrepareEIP712CosmosTx(
 	ctx sdk.Context,
-	appEthermint *app.EthermintApp,
+	appHumans *app.HumansApp,
 	args EIP712TxArgs,
 ) (client.TxBuilder, error) {
 	txArgs := args.CosmosTxArgs
@@ -85,12 +85,12 @@ func PrepareEIP712CosmosTx(
 	fmt.Println("args ", txArgs.Priv)
 	from := sdk.AccAddress(txArgs.Priv.PubKey().Address().Bytes())
 	fmt.Println("from ", from)
-	acc := appEthermint.AccountKeeper.GetAccount(ctx, from)
+	acc := appHumans.AccountKeeper.GetAccount(ctx, from)
 
 	fmt.Println("acc: ", acc)
 	accNumber := acc.GetAccountNumber()
 
-	nonce, err := appEthermint.AccountKeeper.GetSequence(ctx, from)
+	nonce, err := appHumans.AccountKeeper.GetSequence(ctx, from)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ func PrepareEIP712CosmosTx(
 
 	return signCosmosEIP712Tx(
 		ctx,
-		appEthermint,
+		appHumans,
 		args,
 		builder,
 		chainIDNum,
@@ -143,14 +143,14 @@ func createTypedData(args typedDataArgs, useLegacy bool) (apitypes.TypedData, er
 		registry := codectypes.NewInterfaceRegistry()
 		types.RegisterInterfaces(registry)
 		cryptocodec.RegisterInterfaces(registry)
-		ethermintCodec := codec.NewProtoCodec(registry)
+		humansCodec := codec.NewProtoCodec(registry)
 
 		feeDelegation := &eip712.FeeDelegationOptions{
 			FeePayer: args.legacyFeePayer,
 		}
 
 		return eip712.LegacyWrapTxToTypedData(
-			ethermintCodec,
+			humansCodec,
 			args.chainID,
 			args.legacyMsg,
 			args.data,
@@ -164,7 +164,7 @@ func createTypedData(args typedDataArgs, useLegacy bool) (apitypes.TypedData, er
 // the provided private key and the typed data
 func signCosmosEIP712Tx(
 	ctx sdk.Context,
-	appEvmos *app.EthermintApp,
+	appEvmos *app.HumansApp,
 	args EIP712TxArgs,
 	builder authtx.ExtensionOptionsTxBuilder,
 	chainID uint64,

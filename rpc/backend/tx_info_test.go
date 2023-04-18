@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/0x4139/humans/indexer"
+	"github.com/0x4139/humans/rpc/backend/mocks"
+	rpctypes "github.com/0x4139/humans/rpc/types"
+	humans "github.com/0x4139/humans/types"
+	evmtypes "github.com/0x4139/humans/x/evm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/evmos/ethermint/indexer"
-	"github.com/evmos/ethermint/rpc/backend/mocks"
-	rpctypes "github.com/evmos/ethermint/rpc/types"
-	ethermint "github.com/evmos/ethermint/types"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmlog "github.com/tendermint/tendermint/libs/log"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
@@ -455,7 +455,7 @@ func (suite *BackendTestSuite) TestGetTransactionByTxIndex() {
 		registerMock func()
 		height       int64
 		index        uint
-		expTxResult  *ethermint.TxResult
+		expTxResult  *humans.TxResult
 		expPass      bool
 	}{
 		{
@@ -467,7 +467,7 @@ func (suite *BackendTestSuite) TestGetTransactionByTxIndex() {
 			},
 			0,
 			0,
-			&ethermint.TxResult{},
+			&humans.TxResult{},
 			false,
 		},
 	}
@@ -495,7 +495,7 @@ func (suite *BackendTestSuite) TestQueryTendermintTxIndexer() {
 		registerMock func()
 		txGetter     func(*rpctypes.ParsedTxs) *rpctypes.ParsedTx
 		query        string
-		expTxResult  *ethermint.TxResult
+		expTxResult  *humans.TxResult
 		expPass      bool
 	}{
 		{
@@ -508,7 +508,7 @@ func (suite *BackendTestSuite) TestQueryTendermintTxIndexer() {
 				return &rpctypes.ParsedTx{}
 			},
 			"",
-			&ethermint.TxResult{},
+			&humans.TxResult{},
 			false,
 		},
 	}
@@ -604,7 +604,7 @@ func (suite *BackendTestSuite) TestGetGasUsed() {
 	testCases := []struct {
 		name                     string
 		fixRevertGasRefundHeight int64
-		txResult                 *ethermint.TxResult
+		txResult                 *humans.TxResult
 		price                    *big.Int
 		gas                      uint64
 		exp                      uint64
@@ -612,7 +612,7 @@ func (suite *BackendTestSuite) TestGetGasUsed() {
 		{
 			"success txResult",
 			1,
-			&ethermint.TxResult{
+			&humans.TxResult{
 				Height:  1,
 				Failed:  false,
 				GasUsed: 53026,
@@ -624,7 +624,7 @@ func (suite *BackendTestSuite) TestGetGasUsed() {
 		{
 			"fail txResult before cap",
 			2,
-			&ethermint.TxResult{
+			&humans.TxResult{
 				Height:  1,
 				Failed:  true,
 				GasUsed: 53026,
@@ -636,7 +636,7 @@ func (suite *BackendTestSuite) TestGetGasUsed() {
 		{
 			"fail txResult after cap",
 			2,
-			&ethermint.TxResult{
+			&humans.TxResult{
 				Height:  3,
 				Failed:  true,
 				GasUsed: 53026,

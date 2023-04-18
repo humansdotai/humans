@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
+	evmtypes "github.com/0x4139/humans/x/evm/types"
 	"github.com/ethereum/go-ethereum/common"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 )
@@ -42,7 +42,7 @@ func TestParseTxResult(t *testing.T) {
 						{Key: []byte("recipient"), Value: []byte("0x775b87ef5D82ca211811C1a02CE0fE0CA3a455d7")},
 					}},
 					{Type: "message", Attributes: []abci.EventAttribute{
-						{Key: []byte("action"), Value: []byte("/ethermint.evm.v1.MsgEthereumTx")},
+						{Key: []byte("action"), Value: []byte("/humans.evm.v1.MsgEthereumTx")},
 						{Key: []byte("key"), Value: []byte("ethm17xpfvakm2amg962yls6f84z3kell8c5lthdzgl")},
 						{Key: []byte("module"), Value: []byte("evm")},
 						{Key: []byte("sender"), Value: []byte(address)},
@@ -102,7 +102,7 @@ func TestParseTxResult(t *testing.T) {
 						{Key: []byte("recipient"), Value: []byte("0x775b87ef5D82ca211811C1a02CE0fE0CA3a455d7")},
 					}},
 					{Type: "message", Attributes: []abci.EventAttribute{
-						{Key: []byte("action"), Value: []byte("/ethermint.evm.v1.MsgEthereumTx")},
+						{Key: []byte("action"), Value: []byte("/humans.evm.v1.MsgEthereumTx")},
 						{Key: []byte("key"), Value: []byte("ethm17xpfvakm2amg962yls6f84z3kell8c5lthdzgl")},
 						{Key: []byte("module"), Value: []byte("evm")},
 						{Key: []byte("sender"), Value: []byte(address)},

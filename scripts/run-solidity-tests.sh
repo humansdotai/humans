@@ -3,9 +3,9 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
 # remove existing daemon
-rm -rf ~/.ethermintd
+rm -rf ~/.humansd
 
-# build ethermint binary
+# build humans binary
 make install
 
 cd tests/solidity
@@ -19,4 +19,4 @@ else
     yarn install
 fi
 
-yarn test --network ethermint $@
+yarn test --network humans $@

@@ -3,7 +3,7 @@ package keeper
 import (
 	"math/big"
 
-	"github.com/evmos/ethermint/x/feemarket/types"
+	"github.com/0x4139/humans/x/feemarket/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

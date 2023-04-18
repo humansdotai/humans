@@ -6,13 +6,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/params"
 
+	"github.com/0x4139/humans/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/ethermint/types"
 )
 
 var (
-	// DefaultEVMDenom defines the default EVM denomination on Ethermint
+	// DefaultEVMDenom defines the default EVM denomination on Humans
 	DefaultEVMDenom = types.AttoPhoton
 	// DefaultAllowUnprotectedTxs rejects all unprotected txs (i.e false)
 	DefaultAllowUnprotectedTxs = false

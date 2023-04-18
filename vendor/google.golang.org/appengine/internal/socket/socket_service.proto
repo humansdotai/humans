@@ -152,7 +152,7 @@ message RemoteSocketServiceError {
     SYS_ERFKILL = 132;
   }
 
-  optional int32 system_error = 1 [default=0];
+  optional int32 system_error = 1 [ default = 0 ];
   optional string error_detail = 2;
 }
 
@@ -162,8 +162,6 @@ message AddressPort {
 
   optional string hostname_hint = 3;
 }
-
-
 
 message CreateSocketRequest {
   enum SocketFamily {
@@ -183,7 +181,7 @@ message CreateSocketRequest {
 
   optional AddressPort proxy_external_ip = 4;
 
-  optional int32 listen_backlog = 5 [default=0];
+  optional int32 listen_backlog = 5 [ default = 0 ];
 
   optional AddressPort remote_ip = 6;
 
@@ -202,37 +200,20 @@ message CreateSocketReply {
   extensions 1000 to max;
 }
 
-
-
 message BindRequest {
   required string socket_descriptor = 1;
   required AddressPort proxy_external_ip = 2;
 }
 
-message BindReply {
-  optional AddressPort proxy_external_ip = 1;
-}
+message BindReply { optional AddressPort proxy_external_ip = 1; }
 
+message GetSocketNameRequest { required string socket_descriptor = 1; }
 
+message GetSocketNameReply { optional AddressPort proxy_external_ip = 2; }
 
-message GetSocketNameRequest {
-  required string socket_descriptor = 1;
-}
+message GetPeerNameRequest { required string socket_descriptor = 1; }
 
-message GetSocketNameReply {
-  optional AddressPort proxy_external_ip = 2;
-}
-
-
-
-message GetPeerNameRequest {
-  required string socket_descriptor = 1;
-}
-
-message GetPeerNameReply {
-  optional AddressPort peer_ip = 2;
-}
-
+message GetPeerNameReply { optional AddressPort peer_ip = 2; }
 
 message SocketOption {
 
@@ -284,29 +265,24 @@ message SocketOption {
   required bytes value = 3;
 }
 
-
 message SetSocketOptionsRequest {
   required string socket_descriptor = 1;
   repeated SocketOption options = 2;
 }
 
-message SetSocketOptionsReply {
-}
+message SetSocketOptionsReply {}
 
 message GetSocketOptionsRequest {
   required string socket_descriptor = 1;
   repeated SocketOption options = 2;
 }
 
-message GetSocketOptionsReply {
-  repeated SocketOption options = 2;
-}
-
+message GetSocketOptionsReply { repeated SocketOption options = 2; }
 
 message ConnectRequest {
   required string socket_descriptor = 1;
   required AddressPort remote_ip = 2;
-  optional double timeout_seconds = 3 [default=-1];
+  optional double timeout_seconds = 3 [ default = -1 ];
 }
 
 message ConnectReply {
@@ -315,27 +291,22 @@ message ConnectReply {
   extensions 1000 to max;
 }
 
-
 message ListenRequest {
   required string socket_descriptor = 1;
   required int32 backlog = 2;
 }
 
-message ListenReply {
-}
-
+message ListenReply {}
 
 message AcceptRequest {
   required string socket_descriptor = 1;
-  optional double timeout_seconds = 2 [default=-1];
+  optional double timeout_seconds = 2 [ default = -1 ];
 }
 
 message AcceptReply {
   optional bytes new_socket_descriptor = 2;
   optional AddressPort remote_address = 3;
 }
-
-
 
 message ShutDownRequest {
   enum How {
@@ -348,34 +319,25 @@ message ShutDownRequest {
   required int64 send_offset = 3;
 }
 
-message ShutDownReply {
-}
-
-
+message ShutDownReply {}
 
 message CloseRequest {
   required string socket_descriptor = 1;
-  optional int64 send_offset = 2 [default=-1];
+  optional int64 send_offset = 2 [ default = -1 ];
 }
 
-message CloseReply {
-}
-
-
+message CloseReply {}
 
 message SendRequest {
   required string socket_descriptor = 1;
-  required bytes data = 2 [ctype=CORD];
+  required bytes data = 2 [ ctype = CORD ];
   required int64 stream_offset = 3;
-  optional int32 flags = 4 [default=0];
+  optional int32 flags = 4 [ default = 0 ];
   optional AddressPort send_to = 5;
-  optional double timeout_seconds = 6 [default=-1];
+  optional double timeout_seconds = 6 [ default = -1 ];
 }
 
-message SendReply {
-  optional int32 data_sent = 1;
-}
-
+message SendReply { optional int32 data_sent = 1; }
 
 message ReceiveRequest {
   enum Flags {
@@ -384,18 +346,16 @@ message ReceiveRequest {
   }
   required string socket_descriptor = 1;
   required int32 data_size = 2;
-  optional int32 flags = 3 [default=0];
-  optional double timeout_seconds = 5 [default=-1];
+  optional int32 flags = 3 [ default = 0 ];
+  optional double timeout_seconds = 5 [ default = -1 ];
 }
 
 message ReceiveReply {
   optional int64 stream_offset = 2;
-  optional bytes data = 3 [ctype=CORD];
+  optional bytes data = 3 [ ctype = CORD ];
   optional AddressPort received_from = 4;
   optional int32 buffer_size = 5;
 }
-
-
 
 message PollEvent {
 
@@ -423,12 +383,10 @@ message PollEvent {
 
 message PollRequest {
   repeated PollEvent events = 1;
-  optional double timeout_seconds = 2 [default=-1];
+  optional double timeout_seconds = 2 [ default = -1 ];
 }
 
-message PollReply {
-  repeated PollEvent events = 2;
-}
+message PollReply { repeated PollEvent events = 2; }
 
 message ResolveRequest {
   required string name = 1;

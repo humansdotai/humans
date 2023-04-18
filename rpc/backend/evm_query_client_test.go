@@ -7,14 +7,14 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/0x4139/humans/rpc/backend/mocks"
+	rpc "github.com/0x4139/humans/rpc/types"
+	"github.com/0x4139/humans/tests"
+	evmtypes "github.com/0x4139/humans/x/evm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	grpctypes "github.com/cosmos/cosmos-sdk/types/grpc"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/ethermint/rpc/backend/mocks"
-	rpc "github.com/evmos/ethermint/rpc/types"
-	"github.com/evmos/ethermint/tests"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	mock "github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
@@ -23,9 +23,9 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// QueryClient defines a mocked object that implements the ethermint GRPC
+// QueryClient defines a mocked object that implements the humans GRPC
 // QueryClient interface. It allows for performing QueryClient queries without having
-// to run a ethermint GRPC server.
+// to run a humans GRPC server.
 //
 // To use a mock method it has to be registered in a given test.
 var _ evmtypes.QueryClient = &mocks.EVMQueryClient{}
