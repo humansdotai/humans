@@ -13,7 +13,7 @@ import (
 
 var (
 	// DefaultEVMDenom defines the default EVM denomination on Humans
-	DefaultEVMDenom = types.AttoPhoton
+	DefaultEVMDenom = types.AttoHeart
 	// DefaultAllowUnprotectedTxs rejects all unprotected txs (i.e false)
 	DefaultAllowUnprotectedTxs = false
 	// DefaultEnableCreate enables contract creation (i.e true)

@@ -124,8 +124,8 @@ func DefaultConfig() Config {
 		TimeoutCommit:     2 * time.Second,
 		ChainID:           fmt.Sprintf("humans_%d-1", tmrand.Int63n(9999999999999)+1),
 		NumValidators:     4,
-		BondDenom:         humans.AttoPhoton,
-		MinGasPrices:      fmt.Sprintf("0.000006%s", humans.AttoPhoton),
+		BondDenom:         humans.AttoHeart,
+		MinGasPrices:      fmt.Sprintf("0.000006%s", humans.AttoHeart),
 		AccountTokens:     sdk.TokensFromConsensusPower(1000, humans.PowerReduction),
 		StakingTokens:     sdk.TokensFromConsensusPower(500, humans.PowerReduction),
 		BondedTokens:      sdk.TokensFromConsensusPower(100, humans.PowerReduction),
@@ -470,7 +470,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 			return nil, err
 		}
 
-		customAppTemplate, _ := config.AppConfig(humans.AttoPhoton)
+		customAppTemplate, _ := config.AppConfig(humans.AttoHeart)
 		srvconfig.SetConfigTemplate(customAppTemplate)
 		srvconfig.WriteConfigFile(filepath.Join(nodeDir, "config/app.toml"), appCfg)
 

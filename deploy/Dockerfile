@@ -11,15 +11,21 @@ WORKDIR /go/src/github.com/0x4139/humans
 # Add source files
 COPY . .
 
+RUN make clean
 # build Humans
 RUN make build-linux
 
 # Final image
-FROM golang:1.19 as final
+FROM golang:stretch as final
 
 WORKDIR /
 
 RUN apt-get update
+
+# Install minimum necessary dependencies
+ENV PACKAGES curl make git libc-dev bash gcc
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y $PACKAGES
 
 # Copy over binaries from the build-env
 COPY --from=build-env /go/src/github.com/0x4139/humans/build/humansd /

@@ -8,7 +8,7 @@ import (
 
 const (
 	// Bech32Prefix defines the Bech32 prefix used for EthAccounts
-	Bech32Prefix = "ethm"
+	Bech32Prefix = "human"
 
 	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
 	Bech32PrefixAccAddr = Bech32Prefix
@@ -49,7 +49,7 @@ func RegisterDenoms() {
 		panic(err)
 	}
 
-	if err := sdk.RegisterDenom(humans.AttoPhoton, sdk.NewDecWithPrec(1, humans.BaseDenomUnit)); err != nil {
+	if err := sdk.RegisterDenom(humans.AttoHeart, sdk.NewDecWithPrec(1, humans.BaseDenomUnit)); err != nil {
 		panic(err)
 	}
 }

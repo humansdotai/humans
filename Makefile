@@ -128,7 +128,8 @@ endif
 
 BUILD_TARGETS := build install
 
-build: BUILD_ARGS=-o $(BUILDDIR)/
+build: clean
+	BUILD_ARGS=-o $(BUILDDIR)/
 build-linux:
 	GOOS=linux GOARCH=amd64 LEDGER_ENABLED=false $(MAKE) build
 
@@ -386,18 +387,18 @@ localnet-build:
 	@$(MAKE) -C deploy
 
 # Start a 4-node testnet locally
-localnet-start: localnet-stop
+localnet-start: localnet-stop clean
 ifeq ($(OS),Windows_NT)
 	mkdir localnet-setup &
 	@$(MAKE) localnet-build
 
-	IF not exist "build/node0/$(HUMANS_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\humans\Z humansd/node "./humansd testnet --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3"
+	IF not exist "build/node0/$(HUMANS_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\humans\Z humansd/node "./humansd testnet init-files --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3"
 	docker-compose up -d
 else
 	mkdir -p localnet-setup
 	@$(MAKE) localnet-build
 
-	if ! [ -f localnet-setup/node0/$(HUMANS_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/localnet-setup:/humans:Z humansd/node "./humansd testnet --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3"; fi
+	if ! [ -f localnet-setup/node0/$(HUMANS_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/localnet-setup:/humans:Z humansd/node "./humansd testnet init-files --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3"; fi
 	docker-compose up -d
 endif
 
@@ -406,7 +407,7 @@ localnet-stop:
 	docker-compose down
 
 # Clean testnet
-localnet-clean:
+localnet-clean:humansd testnet --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3
 	docker-compose down
 	sudo rm -rf localnet-setup
 

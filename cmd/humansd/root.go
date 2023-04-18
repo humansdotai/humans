@@ -86,8 +86,8 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 				return err
 			}
 
-			// FIXME: replace AttoPhoton with bond denom
-			customAppTemplate, customAppConfig := servercfg.AppConfig(humans.AttoPhoton)
+			// FIXME: replace AttoHeart with bond denom
+			customAppTemplate, customAppConfig := servercfg.AppConfig(humans.AttoHeart)
 
 			return sdkserver.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig, tmcfg.DefaultConfig())
 		},

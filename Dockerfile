@@ -13,11 +13,18 @@ RUN apk add linux-headers
 # Add source files
 COPY . .
 
+# Cleanup
+RUN make clean
 # Make the binary
 RUN make build
 
 # Final image
 FROM alpine:3.17.3
+
+ENV PACKAGES git build-base
+RUN apk add --update $PACKAGES
+RUN apk add linux-headers
+
 
 # Install ca-certificates
 RUN apk add --update ca-certificates jq
