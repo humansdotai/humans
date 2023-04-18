@@ -164,7 +164,7 @@ func createTypedData(args typedDataArgs, useLegacy bool) (apitypes.TypedData, er
 // the provided private key and the typed data
 func signCosmosEIP712Tx(
 	ctx sdk.Context,
-	appEvmos *app.HumansApp,
+	appHumans *app.HumansApp,
 	args EIP712TxArgs,
 	builder authtx.ExtensionOptionsTxBuilder,
 	chainID uint64,
@@ -173,7 +173,7 @@ func signCosmosEIP712Tx(
 	priv := args.CosmosTxArgs.Priv
 
 	from := sdk.AccAddress(priv.PubKey().Address().Bytes())
-	nonce, err := appEvmos.AccountKeeper.GetSequence(ctx, from)
+	nonce, err := appHumans.AccountKeeper.GetSequence(ctx, from)
 	if err != nil {
 		return nil, err
 	}

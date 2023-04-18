@@ -100,9 +100,6 @@ import (
 	ibchost "github.com/cosmos/ibc-go/v6/modules/core/24-host"
 	ibckeeper "github.com/cosmos/ibc-go/v6/modules/core/keeper"
 
-	// unnamed import of statik for swagger UI support
-	_ "github.com/0x4139/humans/client/docs/statik"
-
 	"github.com/0x4139/humans/app/ante"
 	"github.com/0x4139/humans/ethereum/eip712"
 	srvflags "github.com/0x4139/humans/server/flags"

@@ -298,9 +298,6 @@ func startInProcess(ctx *server.Context, clientCtx client.Context, opts StartOpt
 		defer func() {
 			ctx.Logger.Info("stopping CPU profiler", "profile", cpuProfile)
 			pprof.StopCPUProfile()
-			if err := f.Close(); err != nil {
-				logger.Error("failed to close CPU profiler file", "error", err.Error())
-			}
 		}()
 	}
 

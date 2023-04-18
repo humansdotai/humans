@@ -1,5 +1,5 @@
-// Copyright 2023 Evmos Foundation
-// This file is part of Evmos' Humans library.
+// Copyright 2023 Humans Foundation
+// This file is part of Humans' Humans library.
 //
 // The Humans library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by

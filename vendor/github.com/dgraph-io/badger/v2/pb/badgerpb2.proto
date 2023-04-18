@@ -35,26 +35,30 @@ message KV {
   bool stream_done = 11;
 }
 
-message KVList { repeated KV kv = 1; }
+message KVList {
+  repeated KV kv = 1;
+}
 
 message ManifestChangeSet {
   // A set of changes that are applied atomically.
   repeated ManifestChange changes = 1;
 }
 
-enum EncryptionAlgo { aes = 0; }
+enum EncryptionAlgo {
+  aes = 0;
+}
 
 message ManifestChange {
-  uint64 Id = 1; // Table ID.
+  uint64 Id = 1;            // Table ID.
   enum Operation {
-    CREATE = 0;
-    DELETE = 1;
+          CREATE = 0;
+          DELETE = 1;
   }
-  Operation Op = 2;
-  uint32 Level = 3; // Only used for CREATE.
-  uint64 key_id = 4;
+  Operation Op   = 2;
+  uint32 Level   = 3;       // Only used for CREATE.
+  uint64 key_id  = 4;
   EncryptionAlgo encryption_algo = 5;
-  uint32 compression = 6; // Only used for CREATE Op.
+  uint32 compression = 6;   // Only used for CREATE Op.
 }
 
 message BlockOffset {
@@ -79,8 +83,8 @@ message Checksum {
 }
 
 message DataKey {
-  uint64 key_id = 1;
-  bytes data = 2;
-  bytes iv = 3;
-  int64 created_at = 4;
+  uint64 key_id      = 1;
+  bytes  data       = 2;
+  bytes  iv         = 3;
+  int64  created_at = 4;
 }

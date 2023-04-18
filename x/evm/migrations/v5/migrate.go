@@ -1,10 +1,10 @@
 package v5
 
 import (
+	"github.com/0x4139/humans/x/evm/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/0x4139/humans/x/evm/types"
 
 	v5types "github.com/0x4139/humans/x/evm/migrations/v5/types"
 )
@@ -30,11 +30,6 @@ func MigrateStore(
 
 	extraEIPsBz := store.Get(types.ParamStoreKeyExtraEIPs)
 	cdc.MustUnmarshal(extraEIPsBz, &extraEIPs)
-
-	// revert ExtraEIP change for Evmos testnet
-	if ctx.ChainID() == "evmos_9000-4" {
-		extraEIPs.EIPs = []int64{}
-	}
 
 	chainCfgBz := store.Get(types.ParamStoreKeyChainConfig)
 	cdc.MustUnmarshal(chainCfgBz, &chainConfig)

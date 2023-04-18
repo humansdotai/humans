@@ -146,7 +146,7 @@ type (
 	// Note, due to Tendermint constraints in regards to RPC functionality, there
 	// may only be one test network running at a time. Thus, any caller must be
 	// sure to Cleanup after testing is finished in order to allow other tests
-	// to create networks. In addition, only the first validator will have a valid
+	// to create deploy. In addition, only the first validator will have a valid
 	// RPC and API server/client.
 	Network struct {
 		Logger     Logger
@@ -332,8 +332,8 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 		ctx.Logger = logger
 
 		nodeDirName := fmt.Sprintf("node%d", i)
-		nodeDir := filepath.Join(network.BaseDir, nodeDirName, "evmosd")
-		clientDir := filepath.Join(network.BaseDir, nodeDirName, "evmoscli")
+		nodeDir := filepath.Join(network.BaseDir, nodeDirName, "humansd")
+		clientDir := filepath.Join(network.BaseDir, nodeDirName, "humanscli")
 		gentxsDir := filepath.Join(network.BaseDir, "gentxs")
 
 		err := os.MkdirAll(filepath.Join(nodeDir, "config"), 0o750)
@@ -604,7 +604,7 @@ func (n *Network) WaitForNextBlock() error {
 
 // Cleanup removes the root testing (temporary) directory and stops both the
 // Tendermint and API services. It allows other callers to create and start
-// test networks. This method must be called when a test is finished, typically
+// test deploy. This method must be called when a test is finished, typically
 // in a defer.
 func (n *Network) Cleanup() {
 	defer func() {
