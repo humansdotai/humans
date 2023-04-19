@@ -128,12 +128,11 @@ endif
 
 BUILD_TARGETS := build install
 
-build: clean
-	BUILD_ARGS=-o $(BUILDDIR)/
+build: BUILD_ARGS=-o $(BUILDDIR)/
 build-linux:
 	GOOS=linux GOARCH=amd64 LEDGER_ENABLED=false $(MAKE) build
 
-$(BUILD_TARGETS): go.sum $(BUILDDIR)/
+$(BUILD_TARGETS): clean go.sum $(BUILDDIR)/
 	go $@ $(BUILD_FLAGS) $(BUILD_ARGS) ./...
 
 $(BUILDDIR)/:
@@ -154,17 +153,15 @@ docker-build:
 $(MOCKS_DIR):
 	mkdir -p $(MOCKS_DIR)
 
-distclean: clean tools-clean
-
 clean:
-	rm -rf \
+	@rm -rf \
     $(BUILDDIR)/ \
     artifacts/ \
     tmp-swagger-gen/
 
 all: build
 
-build-all: tools build lint test vulncheck
+build-all: build vulncheck
 
 .PHONY: distclean clean build-all
 
@@ -217,105 +214,6 @@ go.sum: go.mod
 vulncheck: $(BUILDDIR)/
 	GOBIN=$(BUILDDIR) go install golang.org/x/vuln/cmd/govulncheck@latest
 	$(BUILDDIR)/govulncheck ./...
-
-###############################################################################
-###                              Documentation                              ###
-###############################################################################
-
-update-swagger-docs: statik
-	$(BINDIR)/statik -src=client/docs/swagger-ui -dest=client/docs -f -m
-	@if [ -n "$(git status --porcelain)" ]; then \
-        echo "\033[91mSwagger docs are out of sync!!!\033[0m";\
-        exit 1;\
-    else \
-        echo "\033[92mSwagger docs are in sync\033[0m";\
-    fi
-.PHONY: update-swagger-docs
-
-godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/0x4139/humans/types"
-	godoc -http=:6060
-
-###############################################################################
-###                           Tests & Simulation                            ###
-###############################################################################
-
-test: test-unit
-test-all: test-unit test-race
-PACKAGES_UNIT=$(shell go list ./... | grep -Ev 'vendor|importer')
-TEST_PACKAGES=./...
-TEST_TARGETS := test-unit test-unit-cover test-race
-
-# Test runs-specific rules. To add a new test target, just add
-# a new rule, customise ARGS or TEST_PACKAGES ad libitum, and
-# append the new rule to the TEST_TARGETS list.
-test-unit: ARGS=-timeout=10m -race
-test-unit: TEST_PACKAGES=$(PACKAGES_UNIT)
-
-test-race: ARGS=-race
-test-race: TEST_PACKAGES=$(PACKAGES_NOSIMULATION)
-$(TEST_TARGETS): run-tests
-
-test-unit-cover: ARGS=-timeout=10m -race -coverprofile=coverage.txt -covermode=atomic
-test-unit-cover: TEST_PACKAGES=$(PACKAGES_UNIT)
-
-run-tests:
-ifneq (,$(shell which tparse 2>/dev/null))
-	go test -mod=readonly -json $(ARGS) $(EXTRA_ARGS) $(TEST_PACKAGES) | tparse
-else
-	go test -mod=readonly $(ARGS)  $(EXTRA_ARGS) $(TEST_PACKAGES)
-endif
-
-test-import:
-	go test -run TestImporterTestSuite -v --vet=off github.com/0x4139/humans/tests/importer
-
-test-rpc:
-	./scripts/integration-test-all.sh -t "rpc" -q 1 -z 1 -s 2 -m "rpc" -r "true"
-
-run-integration-tests:
-	@nix-shell ./tests/integration_tests/shell.nix --run ./scripts/run-integration-tests.sh
-
-.PHONY: run-integration-tests
-
-
-test-rpc-pending:
-	./scripts/integration-test-all.sh -t "pending" -q 1 -z 1 -s 2 -m "pending" -r "true"
-
-test-solidity:
-	@echo "Beginning solidity tests..."
-	./scripts/run-solidity-tests.sh
-
-
-.PHONY: run-tests test test-all test-import test-rpc test-contract test-solidity $(TEST_TARGETS)
-
-
-benchmark:
-	@go test -mod=readonly -bench=. $(PACKAGES_NOSIMULATION)
-.PHONY: benchmark
-
-###############################################################################
-###                                Linting                                  ###
-###############################################################################
-
-lint:
-	@@test -n "$$golangci-lint version | awk '$4 >= 1.42')"
-	golangci-lint run --out-format=tab -n
-
-lint-py:
-	flake8 --show-source --count --statistics \
-          --format="::error file=%(path)s,line=%(row)d,col=%(col)d::%(path)s:%(row)d:%(col)d: %(code)s %(text)s" \
-
-format:
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' -not -name '*.pb.gw.go' | xargs gofumpt -d -e -extra
-
-lint-fix:
-	golangci-lint run --fix --out-format=tab --issues-exit-code=0
-.PHONY: lint lint-fix lint-py
-
-format-fix:
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' -not -name '*.pb.gw.go' | xargs gofumpt -w -s
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' -not -name '*.pb.gw.go' | xargs misspell -w
-.PHONY: format
 
 ###############################################################################
 ###                                Protobuf                                 ###
@@ -384,7 +282,7 @@ proto-check-breaking:
 
 # Build image for a local testnet
 localnet-build:
-	@$(MAKE) -C deploy
+	docker build --no-cache --tag humansd/node .
 
 # Start a 4-node testnet locally
 localnet-start: localnet-stop clean
@@ -407,7 +305,7 @@ localnet-stop:
 	docker-compose down
 
 # Clean testnet
-localnet-clean:humansd testnet --v 4 -o /humans --keyring-backend=test --ip-addresses humansdnode0,humansdnode1,humansdnode2,humansdnode3
+localnet-clean:
 	docker-compose down
 	sudo rm -rf localnet-setup
 

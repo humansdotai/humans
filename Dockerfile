@@ -1,37 +1,39 @@
-FROM golang:alpine AS build-env
+FROM golang:stretch as build-env
 
-# Set up dependencies
-ENV PACKAGES git build-base
+# Install minimum necessary dependencies
+ENV PACKAGES curl make git libc-dev bash gcc
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y $PACKAGES
 
 # Set working directory for the build
 WORKDIR /go/src/github.com/0x4139/humans
 
-# Install dependencies
-RUN apk add --update $PACKAGES
-RUN apk add linux-headers
-
 # Add source files
 COPY . .
 
-# Cleanup
 RUN make clean
-# Make the binary
-RUN make build
+
+# build Humans
+RUN make build-linux
 
 # Final image
-FROM alpine:3.17.3
+FROM golang:stretch as final
 
-ENV PACKAGES git build-base
-RUN apk add --update $PACKAGES
-RUN apk add linux-headers
-
-
-# Install ca-certificates
-RUN apk add --update ca-certificates jq
 WORKDIR /
 
-# Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/0x4139/humans/build/humansd /usr/bin/humansd
+RUN apt-get update
 
-# Run humansd by default
-CMD ["humansd"]
+# Install minimum necessary dependencies
+ENV PACKAGES curl make git libc-dev bash gcc jq
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y $PACKAGES
+
+# Copy over binaries from the build-env
+COPY --from=build-env /go/src/github.com/0x4139/humans/build/humansd /bin/
+COPY start.sh /bin/start-humans
+RUN chmod +x /bin/start-humans
+
+EXPOSE 26656 26657 1317 8545 8546
+
+# Run humansd by default, omit entrypoint to ease using container with humansd
+ENTRYPOINT ["/bin/bash", "-c"]

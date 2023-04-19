@@ -1,73 +1,120 @@
 version: "3"
 
-services:
-  humansdnode0:
-    container_name: humansdnode0
-    image: "humansd/node"
-    ports:
-      - "26657:26657"
-      - "8545:8545"
-      - "8546:8546"
-      - "8125:8125"
-    environment:
-      - ID=0
-      - LOG=${LOG:-humansd.log}
-    volumes:
-      - ./localnet-setup/node0/humansd:/humans:Z
-    networks:
-      - localnet
-    entrypoint: "bash start-docker.sh"
-
-  humansdnode1:
-    container_name: humansdnode1
-    image: "humansd/node"
-    ports:
-      - "26658:26657"
-      - "8555:8545"
-      - "8556:8546"
-      - "8126:8125"
-    environment:
-      - ID=1
-      - LOG=${LOG:-humansd.log}
-    volumes:
-      - ./localnet-setup/node1/humansd:/humans:Z
-    networks:
-      - localnet
-    entrypoint: "bash start-docker.sh"
-
-  humansdnode2:
-    container_name: humansdnode2
-    image: "humansd/node"
-    environment:
-      - ID=2
-      - LOG=${LOG:-humansd.log}
-    ports:
-      - "26659:26657"
-      - "8565:8545"
-      - "8566:8546"
-      - "8127:8125"
-    volumes:
-      - ./localnet-setup/node2/humansd:/humans:Z
-    networks:
-      - localnet
-    entrypoint: "bash start-docker.sh"
-
-  humansdnode3:
-    container_name: humansdnode3
-    image: "humansd/node"
-    environment:
-      - ID=3
-      - LOG=${LOG:-humansd.log}
-    ports:
-      - "26660:26657"
-      - "8575:8545"
-      - "8576:8546"
-      - "8128:8125"
-    volumes:
-      - ./localnet-setup/node3/humansd:/humans:Z
-    networks:
-      - localnet
-    entrypoint: "bash start-docker.sh"
-
+volumes:
+  #monitoring
+  prometheus:
+  grafana:
+  #grafana
+  gentxs:
+  node-0:
+  node-1:
+  node-2:
+  node-3:
+  node-4:
 networks:
-  localnet:
+  testnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+services:
+  # prometheus
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus:/prometheus
+      - ./metrics.yml:/etc/prometheus/prometheus.yml
+    networks:
+      testnet:
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - grafana:/var/lib/grafana
+    networks:
+      testnet:
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+    ports:
+      - 3000:3000
+  # node bootstrap
+  bootstrap:
+    image: humansd/node
+    volumes:
+      - gentxs:/humans/gentx
+      - node-0:/humans/node-0
+      - node-1:/humans/node-1
+      - node-2:/humans/node-2
+      - node-3:/humans/node-3
+      - node-4:/humans/node-4
+    command:
+      - humansd testnet init-files --v 5 -o /humans --keyring-backend=test --starting-ip-address 192.168.0.10 --node-dir-prefix node- --chain-id humans_4139-1
+    networks:
+      testnet:
+  # node
+  node-0:
+    image: humansd/node
+    ports:
+      - "26660:26660"``
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.10
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-0:/data
+  # node
+  node-1:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.11
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-1:/data
+  # node
+  node-2:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.12
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-2:/data
+  # node
+  node-3:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.13
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-3:/data
+  # node
+  node-4:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.14
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-4:/data
