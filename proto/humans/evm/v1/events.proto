@@ -1,5 +1,5 @@
 syntax = "proto3";
-package humans.evm.v1;
+package ethermint.evm.v1;
 
 option go_package = "github.com/0x4139/humans/x/evm/types";
 

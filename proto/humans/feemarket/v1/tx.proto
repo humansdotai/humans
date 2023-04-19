@@ -1,5 +1,5 @@
 syntax = "proto3";
-package humans.feemarket.v1;
+package ethermint.feemarket.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
