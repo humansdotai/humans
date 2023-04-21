@@ -185,20 +185,16 @@ release-dry-run:
 		--rm-dist --skip-validate --skip-publish --snapshot
 
 release:
-	@if [ ! -f ".release-env" ]; then \
-		echo "\033[91m.release-env is required for release\033[0m";\
-		exit 1;\
-	fi
 	docker run \
 		--rm \
 		--privileged \
 		-e CGO_ENABLED=1 \
-		-e GITHUB_TOKEN=$GITHUB_TOKEN \
+		-e GITHUB_TOKEN=${GITHUB_TOKEN} \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v `pwd`:/go/src/$(PACKAGE_NAME) \
 		-w /go/src/$(PACKAGE_NAME) \
 		ghcr.io/goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
-		release --rm-dist --skip-validate
+		release --clean --skip-validate
 
 .PHONY: release-dry-run release
 
