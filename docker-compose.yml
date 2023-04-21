@@ -1,0 +1,120 @@
+version: "3"
+
+volumes:
+  #monitoring
+  prometheus:
+  grafana:
+  #grafana
+  gentxs:
+  node-0:
+  node-1:
+  node-2:
+  node-3:
+  node-4:
+networks:
+  testnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+services:
+  # prometheus
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus:/prometheus
+      - ./metrics.yml:/etc/prometheus/prometheus.yml
+    networks:
+      testnet:
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - grafana:/var/lib/grafana
+    networks:
+      testnet:
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+    ports:
+      - 3000:3000
+  # node bootstrap
+  bootstrap:
+    image: humansd/node
+    volumes:
+      - gentxs:/humans/gentx
+      - node-0:/humans/node-0
+      - node-1:/humans/node-1
+      - node-2:/humans/node-2
+      - node-3:/humans/node-3
+      - node-4:/humans/node-4
+    command:
+      - humansd testnet init-files --v 5 -o /humans --keyring-backend=test --starting-ip-address 192.168.0.10 --node-dir-prefix node- --chain-id humans_4139-1
+    networks:
+      testnet:
+  # node
+  node-0:
+    image: humansd/node
+    ports:
+      - "26660:26660"``
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.10
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-0:/data
+  # node
+  node-1:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.11
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-1:/data
+  # node
+  node-2:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.12
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-2:/data
+  # node
+  node-3:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.13
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-3:/data
+  # node
+  node-4:
+    image: humansd/node
+    networks:
+      testnet:
+        ipv4_address: 192.168.0.14
+    depends_on:
+      - bootstrap
+    command:
+      #  - ls -all /data/humansd/config
+      - start-humans
+    volumes:
+      - node-4:/data
