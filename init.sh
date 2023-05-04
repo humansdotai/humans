@@ -11,7 +11,10 @@ TRACE="--trace"
 # TRACE=""
 
 # validate dependencies are installed
-command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"; exit 1; }
+command -v jq >/dev/null 2>&1 || {
+    echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"
+    exit 1
+}
 
 # remove existing daemon and clientF
 rm -rf ~/.humansd*
@@ -28,19 +31,19 @@ humansd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
 humansd init $MONIKER --chain-id $CHAINID
 
 # Change parameter token denominations to aheart
-cat $HOME/.humansd/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="aheart"' > $HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
-cat $HOME/.humansd/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="aheart"' > $HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
-cat $HOME/.humansd/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="aheart"' > $HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
-cat $HOME/.humansd/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="aheart"' > $HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
+cat $HOME/.humansd/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="aheart"' >$HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
+cat $HOME/.humansd/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="aheart"' >$HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
+cat $HOME/.humansd/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="aheart"' >$HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
+cat $HOME/.humansd/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="aheart"' >$HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
 
 # Set gas limit in genesis
-cat $HOME/.humansd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="20000000"' > $HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
+cat $HOME/.humansd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="20000000"' >$HOME/.humansd/config/tmp_genesis.json && mv $HOME/.humansd/config/tmp_genesis.json $HOME/.humansd/config/genesis.json
 
 # Allocate genesis accounts (cosmos formatted addresses)
 humansd add-genesis-account $KEY 100000000000000000000000000aheart --keyring-backend $KEYRING
 
 # Sign genesis transaction
-humansd gentx $KEY 1000000000000000000000aheart --keyring-backend $KEYRING --chain-id $CHAINID
+humansd gentx $KEY 1000000000000000000000aheart --keyring-backend $KEYRING --chain-id $CHAINID --port 3006
 
 # Collect genesis tx
 humansd collect-gentxs

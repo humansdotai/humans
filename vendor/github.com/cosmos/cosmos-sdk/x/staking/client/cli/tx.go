@@ -180,7 +180,6 @@ $ %s tx staking delegate %s1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm 1000stake --f
 			if err != nil {
 				return err
 			}
-
 			msg := types.NewMsgDelegate(delAddr, valAddr, amount)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
@@ -398,10 +397,17 @@ func newBuildCreateValidatorMsg(clientCtx client.Context, txf tx.Factory, fs *fl
 	genOnly, _ := fs.GetBool(flags.FlagGenerateOnly)
 	if genOnly {
 		ip, _ := fs.GetString(FlagIP)
+		// get the initial validator min self delegation
+		portStr, _ := fs.GetString(FlagMinSelfDelegation)
+
+		port, ok := sdk.NewIntFromString(portStr)
+		if !ok {
+			return txf, nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "port must be a positive integer")
+		}
 		nodeID, _ := fs.GetString(FlagNodeID)
 
 		if nodeID != "" && ip != "" {
-			txf = txf.WithMemo(fmt.Sprintf("%s@%s:26656", nodeID, ip))
+			txf = txf.WithMemo(fmt.Sprintf("%s@%s:%d", nodeID, ip, port.Int64()))
 		}
 	}
 
@@ -413,6 +419,7 @@ func newBuildCreateValidatorMsg(clientCtx client.Context, txf tx.Factory, fs *fl
 func CreateValidatorMsgFlagSet(ipDefault string) (fs *flag.FlagSet, defaultsDesc string) {
 	fsCreateValidator := flag.NewFlagSet("", flag.ContinueOnError)
 	fsCreateValidator.String(FlagIP, ipDefault, "The node's public IP")
+	fsCreateValidator.String(FlagPort, "26656", "The node's public PORT")
 	fsCreateValidator.String(FlagNodeID, "", "The node's NodeID")
 	fsCreateValidator.String(FlagMoniker, "", "The validator's (optional) moniker")
 	fsCreateValidator.String(FlagWebsite, "", "The validator's (optional) website")
@@ -452,6 +459,7 @@ type TxCreateValidatorConfig struct {
 	PubKey cryptotypes.PubKey
 
 	IP              string
+	Port            string
 	Website         string
 	SecurityContact string
 	Details         string
@@ -470,6 +478,16 @@ func PrepareConfigForTxCreateValidator(flagSet *flag.FlagSet, moniker, nodeID, c
 			"the tx's memo field will be unset")
 	}
 	c.IP = ip
+
+	port, err := flagSet.GetString(FlagPort)
+	if err != nil {
+		return c, err
+	}
+	if port == "" {
+		_, _ = fmt.Fprintf(os.Stderr, "couldn't retrieve an external PORT; "+
+			"the tx's memo field will be unset")
+	}
+	c.Port = port
 
 	website, err := flagSet.GetString(FlagWebsite)
 	if err != nil {
@@ -594,10 +612,16 @@ func BuildCreateValidatorMsg(clientCtx client.Context, config TxCreateValidatorC
 	}
 	if generateOnly {
 		ip := config.IP
+		portStr := config.Port
+		port, ok := sdk.NewIntFromString(portStr)
+
+		if !ok {
+			return txBldr, nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "port must be a positive integer")
+		}
 		nodeID := config.NodeID
 
 		if nodeID != "" && ip != "" {
-			txBldr = txBldr.WithMemo(fmt.Sprintf("%s@%s:26656", nodeID, ip))
+			txBldr = txBldr.WithMemo(fmt.Sprintf("%s@%s:%d", nodeID, ip, port.Int64()))
 		}
 	}
 

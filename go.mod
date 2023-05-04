@@ -194,6 +194,7 @@ require (
 replace (
 	// use cosmos keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.1.7-0.20210622111912-ef00f8ac3d76
+	github.com/cosmos/cosmos-sdk => github.com/humansdotai/cosmos-sdk v0.1.3
 	// Fix upstream GHSA-h395-qcrw-5vmq vulnerability.
 	// use cosmos flavored protobufs
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
