@@ -104,6 +104,7 @@ import (
 	"github.com/0x4139/humans/ethereum/eip712"
 	srvflags "github.com/0x4139/humans/server/flags"
 	humans "github.com/0x4139/humans/types"
+	humanstypes "github.com/0x4139/humans/types"
 	"github.com/0x4139/humans/x/evm"
 	evmkeeper "github.com/0x4139/humans/x/evm/keeper"
 	evmtypes "github.com/0x4139/humans/x/evm/types"
@@ -111,7 +112,6 @@ import (
 	"github.com/0x4139/humans/x/feemarket"
 	feemarketkeeper "github.com/0x4139/humans/x/feemarket/keeper"
 	feemarkettypes "github.com/0x4139/humans/x/feemarket/types"
-
 	// Force-load the tracer engines to trigger registration due to Go-Ethereum v1.10.15 changes
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
 	_ "github.com/ethereum/go-ethereum/eth/tracers/native"
@@ -124,6 +124,13 @@ func init() {
 	}
 
 	DefaultNodeHome = filepath.Join(userHomeDir, ".humansd")
+	// manually update the power reduction by replacing micro (u) -> atto (a) heart
+	sdk.DefaultPowerReduction = humanstypes.PowerReduction
+	// modify fee market parameter defaults through global
+	feemarkettypes.DefaultMinGasPrice = MainnetMinGasPrices
+	feemarkettypes.DefaultMinGasMultiplier = MainnetMinGasMultiplier
+	// modify default min commission to 5%
+	stakingtypes.DefaultMinCommissionRate = sdk.NewDecWithPrec(5, 2)
 }
 
 const appName = "humansd"
