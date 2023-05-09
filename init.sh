@@ -43,7 +43,7 @@ cat $HOME/.humansd/config/genesis.json | jq '.consensus_params["block"]["max_gas
 humansd add-genesis-account $KEY 100000000000000000000000000aheart --keyring-backend $KEYRING
 
 # Sign genesis transaction
-humansd gentx $KEY 1000000000000000000000aheart --keyring-backend $KEYRING --chain-id $CHAINID --port 3006
+humansd gentx $KEY 1000000000000000000000aheart --gas-prices 4000000000000000aheart --keyring-backend $KEYRING --chain-id $CHAINID --port 3006
 
 # Collect genesis tx
 humansd collect-gentxs
@@ -90,4 +90,4 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-humansd start --metrics --pruning=nothing --evm.tracer=json $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aheart --json-rpc.api eth,txpool,personal,net,debug,web3,miner --api.enable
+humansd start --metrics --pruning=nothing --evm.tracer=json $TRACE --log_level $LOGLEVEL --minimum-gas-prices=5000000000000000aheart --json-rpc.api eth,txpool,personal,net,debug,web3,miner --api.enable
