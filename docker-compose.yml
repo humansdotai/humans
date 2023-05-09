@@ -11,6 +11,7 @@ volumes:
   node-2:
   node-3:
   node-4:
+  blockscout:
 networks:
   testnet:
     driver: bridge
@@ -18,6 +19,17 @@ networks:
       config:
         - subnet: 192.168.0.0/24
 services:
+  # explorer
+  explorer:
+    image: alethio/ethereum-lite-explorer
+    depends_on:
+      - node-0
+    networks:
+      testnet:
+    environment:
+      - "APP_NODE_URL=http://localhost:8545"
+    ports:
+      - "4000:80"
   # prometheus
   prometheus:
     image: prom/prometheus
@@ -40,6 +52,9 @@ services:
   # node bootstrap
   bootstrap:
     image: humansd/node
+    build:
+      dockerfile: Dockerfile
+      context: .
     volumes:
       - gentxs:/humans/gentx
       - node-0:/humans/node-0
@@ -54,8 +69,9 @@ services:
   # node
   node-0:
     image: humansd/node
-    ports:
-      - "26660:26660"``
+    build:
+      dockerfile: Dockerfile
+      context: .
     networks:
       testnet:
         ipv4_address: 192.168.0.10
@@ -69,6 +85,9 @@ services:
   # node
   node-1:
     image: humansd/node
+    build:
+      dockerfile: Dockerfile
+      context: .
     networks:
       testnet:
         ipv4_address: 192.168.0.11
@@ -82,6 +101,9 @@ services:
   # node
   node-2:
     image: humansd/node
+    build:
+      dockerfile: Dockerfile
+      context: .
     networks:
       testnet:
         ipv4_address: 192.168.0.12
@@ -95,6 +117,9 @@ services:
   # node
   node-3:
     image: humansd/node
+    build:
+      dockerfile: Dockerfile
+      context: .
     networks:
       testnet:
         ipv4_address: 192.168.0.13
@@ -108,6 +133,9 @@ services:
   # node
   node-4:
     image: humansd/node
+    build:
+      dockerfile: Dockerfile
+      context: .
     networks:
       testnet:
         ipv4_address: 192.168.0.14
@@ -118,3 +146,7 @@ services:
       - start-humans
     volumes:
       - node-4:/data
+    ports:
+      - "26660:26660"
+      - "8545:8545"
+      - "8546:8546"

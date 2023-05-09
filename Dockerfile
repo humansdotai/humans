@@ -1,4 +1,4 @@
-FROM golang:stretch as build-env
+FROM golang:1.20.4 as build-env
 
 # Install minimum necessary dependencies
 ENV PACKAGES curl make git libc-dev bash gcc
@@ -17,7 +17,7 @@ RUN make clean
 RUN make build-linux
 
 # Final image
-FROM golang:stretch as final
+FROM golang:1.20.4 as final
 
 WORKDIR /
 
