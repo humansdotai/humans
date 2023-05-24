@@ -2,7 +2,7 @@
 
 This is the official repository for the Humans blockchain. This repository contains the source code and documentation for the blockchain and its related components.
 
-## Getting Started
+## Getting Started for developers
 
 To get started with the Humans blockchain, you will need to clone this repository to your local machine. You can do this by running the following command in your terminal:
 
