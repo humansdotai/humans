@@ -14,7 +14,7 @@ import (
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/0x4139/humans/x/evm/types"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // GetCoinbaseAddress returns the block proposer's validator operator address.

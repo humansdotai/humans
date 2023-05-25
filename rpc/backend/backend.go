@@ -5,10 +5,6 @@ import (
 	"math/big"
 	"time"
 
-	rpctypes "github.com/0x4139/humans/rpc/types"
-	"github.com/0x4139/humans/server/config"
-	humans "github.com/0x4139/humans/types"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/server"
@@ -19,6 +15,10 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
+	rpctypes "github.com/humansdotai/humans/rpc/types"
+	"github.com/humansdotai/humans/server/config"
+	humans "github.com/humansdotai/humans/types"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 )

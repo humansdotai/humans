@@ -12,8 +12,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	rpctypes "github.com/0x4139/humans/rpc/types"
-	"github.com/0x4139/humans/x/evm/types"
+	rpctypes "github.com/humansdotai/humans/rpc/types"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // GetTxCmd returns the transaction commands for this module

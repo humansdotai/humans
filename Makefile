@@ -9,7 +9,7 @@ BINDIR ?= $(GOPATH)/bin
 HUMANS_BINARY = humansd
 HUMANS_DIR = humans
 BUILDDIR ?= $(CURDIR)/build
-HTTPS_GIT := https://github.com/0x4139/humans.git
+HTTPS_GIT := https://github.com/humansdotai/humans.git
 DOCKER := $(shell which docker)
 NAMESPACE := 0x4139
 PROJECT := humans
@@ -169,7 +169,7 @@ build-all: build vulncheck
 ###                                Releasing                                ###
 ###############################################################################
 
-PACKAGE_NAME:=github.com/0x4139/humans
+PACKAGE_NAME:=github.com/humansdotai/humans
 GOLANG_CROSS_VERSION = v1.19
 GOPATH ?= '$(HOME)/go'
 release-dry-run:

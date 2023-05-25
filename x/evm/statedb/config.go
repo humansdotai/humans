@@ -3,9 +3,9 @@ package statedb
 import (
 	"math/big"
 
-	"github.com/0x4139/humans/x/evm/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // TxConfig encapulates the readonly information of current tx for `StateDB`.

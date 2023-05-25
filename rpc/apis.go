@@ -8,16 +8,16 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/0x4139/humans/rpc/backend"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/debug"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/eth"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/eth/filters"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/miner"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/net"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/personal"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/txpool"
-	"github.com/0x4139/humans/rpc/namespaces/ethereum/web3"
-	humans "github.com/0x4139/humans/types"
+	"github.com/humansdotai/humans/rpc/backend"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/debug"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/eth"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/eth/filters"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/miner"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/net"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/personal"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/txpool"
+	"github.com/humansdotai/humans/rpc/namespaces/ethereum/web3"
+	humans "github.com/humansdotai/humans/types"
 
 	rpcclient "github.com/tendermint/tendermint/rpc/jsonrpc/client"
 )

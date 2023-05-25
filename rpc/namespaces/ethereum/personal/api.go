@@ -6,10 +6,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/0x4139/humans/rpc/backend"
+	"github.com/humansdotai/humans/rpc/backend"
 
-	"github.com/0x4139/humans/crypto/hd"
-	humans "github.com/0x4139/humans/types"
+	"github.com/humansdotai/humans/crypto/hd"
+	humans "github.com/humansdotai/humans/types"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -21,7 +21,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 )
 
 // PrivateAccountAPI is the personal_ prefixed set of APIs in the Web3 JSON-RPC spec.

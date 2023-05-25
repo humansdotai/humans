@@ -12,7 +12,7 @@ import (
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/0x4139/humans/x/evm/types"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // GetEthIntrinsicGas returns the intrinsic gas cost for the transaction

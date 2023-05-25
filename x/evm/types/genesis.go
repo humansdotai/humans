@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	humans "github.com/0x4139/humans/types"
+	humans "github.com/humansdotai/humans/types"
 )
 
 // Validate performs a basic validation of a GenesisAccount fields.

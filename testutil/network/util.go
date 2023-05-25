@@ -29,8 +29,8 @@ import (
 	mintypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/0x4139/humans/server"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	"github.com/humansdotai/humans/server"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 )
 
 func startInProcess(cfg Config, val *Validator) error {

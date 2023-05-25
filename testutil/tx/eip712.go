@@ -7,22 +7,22 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	cryptocodec "github.com/0x4139/humans/crypto/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	cryptocodec "github.com/humansdotai/humans/crypto/codec"
 
-	"github.com/0x4139/humans/ethereum/eip712"
 	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
+	"github.com/humansdotai/humans/ethereum/eip712"
 
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 
-	"github.com/0x4139/humans/types"
+	"github.com/humansdotai/humans/types"
 
-	"github.com/0x4139/humans/app"
+	"github.com/humansdotai/humans/app"
 )
 
 type EIP712TxArgs struct {

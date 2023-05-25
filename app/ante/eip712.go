@@ -15,14 +15,14 @@ import (
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	ibcante "github.com/cosmos/ibc-go/v6/modules/core/ante"
 
-	"github.com/0x4139/humans/crypto/ethsecp256k1"
-	"github.com/0x4139/humans/ethereum/eip712"
-	humans "github.com/0x4139/humans/types"
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
+	"github.com/humansdotai/humans/crypto/ethsecp256k1"
+	"github.com/humansdotai/humans/ethereum/eip712"
+	humans "github.com/humansdotai/humans/types"
 
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 )
 
 var humansCodec codec.ProtoCodecMarshaler

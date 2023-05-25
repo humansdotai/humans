@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/0x4139/humans/version"
+	"github.com/humansdotai/humans/version"
 )
 
 const flagLong = "long"

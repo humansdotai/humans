@@ -7,15 +7,15 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 
-	"github.com/0x4139/humans/rpc"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/server"
 	"github.com/cosmos/cosmos-sdk/server/types"
 	ethlog "github.com/ethereum/go-ethereum/log"
 	ethrpc "github.com/ethereum/go-ethereum/rpc"
+	"github.com/humansdotai/humans/rpc"
 
-	"github.com/0x4139/humans/server/config"
-	humans "github.com/0x4139/humans/types"
+	"github.com/humansdotai/humans/server/config"
+	humans "github.com/humansdotai/humans/types"
 )
 
 // StartJSONRPC starts the JSON-RPC server

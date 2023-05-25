@@ -16,10 +16,10 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/tendermint/tendermint/libs/log"
 
-	humans "github.com/0x4139/humans/types"
-	"github.com/0x4139/humans/x/evm/statedb"
-	"github.com/0x4139/humans/x/evm/types"
-	evm "github.com/0x4139/humans/x/evm/vm"
+	humans "github.com/humansdotai/humans/types"
+	"github.com/humansdotai/humans/x/evm/statedb"
+	"github.com/humansdotai/humans/x/evm/types"
+	evm "github.com/humansdotai/humans/x/evm/vm"
 )
 
 // Keeper grants access to the EVM module state and implements the go-ethereum StateDB interface.

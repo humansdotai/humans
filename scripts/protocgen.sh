@@ -21,5 +21,5 @@ done
 # TODO: command to generate docs using protoc-gen-doc was deleted here
 
 # move proto files to the right places
-cp -r github.com/0x4139/humans/* ./
+cp -r github.com/humansdotai/humans/* ./
 rm -rf github.com

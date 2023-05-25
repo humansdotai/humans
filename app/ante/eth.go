@@ -10,10 +10,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 
-	humans "github.com/0x4139/humans/types"
-	"github.com/0x4139/humans/x/evm/keeper"
-	"github.com/0x4139/humans/x/evm/statedb"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	humans "github.com/humansdotai/humans/types"
+	"github.com/humansdotai/humans/x/evm/keeper"
+	"github.com/humansdotai/humans/x/evm/statedb"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
@@ -129,7 +129,7 @@ func (egcd EthGasConsumeDecorator) AnteHandle(ctx sdk.Context, tx sdk.Tx, simula
 		// that is not bubbled up. Thus, the Tx never runs on DeliverMode
 		// Error: "gas wanted -1 is negative"
 		// For more information, see issue #1554
-		// https://github.com/0x4139/humans/issues/1554
+		// https://github.com/humansdotai/humans/issues/1554
 		newCtx := ctx.WithGasMeter(humans.NewInfiniteGasMeterWithLimit(gasWanted))
 		return next(newCtx, tx, simulate)
 	}

@@ -17,7 +17,7 @@ import (
 
 	grpctypes "github.com/cosmos/cosmos-sdk/types/grpc"
 
-	humans "github.com/0x4139/humans/types"
+	humans "github.com/humansdotai/humans/types"
 )
 
 // BlockNumber represents decoding hex string to block values

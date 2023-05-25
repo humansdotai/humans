@@ -8,7 +8,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/0x4139/humans/rpc/backend"
+	"github.com/humansdotai/humans/rpc/backend"
 )
 
 // API is the private miner prefixed set of APIs in the Miner JSON-RPC spec.

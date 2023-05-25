@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	humans "github.com/0x4139/humans/types"
+	humans "github.com/humansdotai/humans/types"
 )
 
 // NewTransactionLogs creates a new NewTransactionLogs instance.

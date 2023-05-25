@@ -9,7 +9,7 @@ import (
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/0x4139/humans/x/feemarket/types"
+	"github.com/humansdotai/humans/x/feemarket/types"
 )
 
 // KeyPrefixBaseFeeV1 TODO: Temporary will be removed with params refactor PR

@@ -1,7 +1,7 @@
 package web3
 
 import (
-	"github.com/0x4139/humans/version"
+	"github.com/humansdotai/humans/version"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"

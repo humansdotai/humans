@@ -7,7 +7,7 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/0x4139/humans/app"
+	"github.com/humansdotai/humans/app"
 )
 
 // Commit commits a block at a given time. Reminder: At the end of each

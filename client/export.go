@@ -12,9 +12,9 @@ import (
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/spf13/cobra"
 
-	"github.com/0x4139/humans/crypto/ethsecp256k1"
-	"github.com/0x4139/humans/crypto/hd"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
+	"github.com/humansdotai/humans/crypto/ethsecp256k1"
+	"github.com/humansdotai/humans/crypto/hd"
 )
 
 // UnsafeExportEthKeyCommand exports a key with the given name as a private key in hex format.

@@ -8,10 +8,10 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	humans "github.com/0x4139/humans/types"
-	"github.com/0x4139/humans/x/evm/statedb"
-	"github.com/0x4139/humans/x/evm/types"
-	evm "github.com/0x4139/humans/x/evm/vm"
+	humans "github.com/humansdotai/humans/types"
+	"github.com/humansdotai/humans/x/evm/statedb"
+	"github.com/humansdotai/humans/x/evm/types"
+	evm "github.com/humansdotai/humans/x/evm/vm"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
@@ -27,7 +27,7 @@ import (
 // beneficiary of the coinbase transaction (since we're not mining).
 //
 // NOTE: the RANDOM opcode is currently not supported since it requires
-// RANDAO implementation. See https://github.com/0x4139/humans/pull/1520#pullrequestreview-1200504697
+// RANDAO implementation. See https://github.com/humansdotai/humans/pull/1520#pullrequestreview-1200504697
 // for more information.
 
 func (k *Keeper) NewEVM(
@@ -393,7 +393,7 @@ func (k *Keeper) ApplyMessageWithConfig(ctx sdk.Context,
 
 	// calculate a minimum amount of gas to be charged to sender if GasLimit
 	// is considerably higher than GasUsed to stay more aligned with Tendermint gas mechanics
-	// for more info https://github.com/0x4139/humans/issues/1085
+	// for more info https://github.com/humansdotai/humans/issues/1085
 	gasLimit := sdk.NewDec(int64(msg.Gas()))
 	minGasMultiplier := k.GetMinGasMultiplier(ctx)
 	minimumGasUsed := gasLimit.Mul(minGasMultiplier)

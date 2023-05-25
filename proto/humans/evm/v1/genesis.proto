@@ -4,7 +4,7 @@ package ethermint.evm.v1;
 import "humans/evm/v1/evm.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/0x4139/humans/x/evm/types";
+option go_package = "github.com/humansdotai/humans/x/evm/types";
 
 // GenesisState defines the evm module's genesis state.
 message GenesisState {

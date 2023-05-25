@@ -13,11 +13,11 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/0x4139/humans/rpc/backend"
+	"github.com/humansdotai/humans/rpc/backend"
 
-	rpctypes "github.com/0x4139/humans/rpc/types"
-	humans "github.com/0x4139/humans/types"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	rpctypes "github.com/humansdotai/humans/rpc/types"
+	humans "github.com/humansdotai/humans/types"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 )
 
 // The Ethereum API allows applications to connect to an Humans node that is

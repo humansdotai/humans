@@ -6,7 +6,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y $PACKAGES
 
 # Set working directory for the build
-WORKDIR /go/src/github.com/0x4139/humans
+WORKDIR /go/src/github.com/humansdotai/humans
 
 # Add source files
 COPY . .
@@ -29,7 +29,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y $PACKAGES
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/0x4139/humans/build/humansd /bin/
+COPY --from=build-env /go/src/github.com/humansdotai/humans/build/humansd /bin/
 COPY start.sh /bin/start-humans
 RUN chmod +x /bin/start-humans
 

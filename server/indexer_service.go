@@ -8,7 +8,7 @@ import (
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 	"github.com/tendermint/tendermint/types"
 
-	humans "github.com/0x4139/humans/types"
+	humans "github.com/humansdotai/humans/types"
 )
 
 const (

@@ -8,7 +8,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/0x4139/humans/x/evm/types";
+option go_package = "github.com/humansdotai/humans/x/evm/types";
 
 // Query defines the gRPC querier service.
 service Query {
