@@ -1,4 +1,4 @@
-module github.com/0x4139/humans
+module github.com/humansdotai/humans
 
 go 1.19
 

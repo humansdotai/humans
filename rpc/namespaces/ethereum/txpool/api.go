@@ -5,11 +5,11 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/0x4139/humans/rpc/types"
+	"github.com/humansdotai/humans/rpc/types"
 )
 
 // PublicAPI offers and API for the transaction pool. It only operates on data that is non-confidential.
-// NOTE: For more info about the current status of this endpoints see https://github.com/0x4139/humans/issues/124
+// NOTE: For more info about the current status of this endpoints see https://github.com/humansdotai/humans/issues/124
 type PublicAPI struct {
 	logger log.Logger
 }

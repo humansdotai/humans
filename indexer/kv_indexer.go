@@ -4,19 +4,19 @@ import (
 	"fmt"
 
 	errorsmod "cosmossdk.io/errors"
-	rpctypes "github.com/0x4139/humans/rpc/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/ethereum/go-ethereum/common"
+	rpctypes "github.com/humansdotai/humans/rpc/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	humans "github.com/0x4139/humans/types"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
+	humans "github.com/humansdotai/humans/types"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
 )
 
 const (

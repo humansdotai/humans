@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	"github.com/0x4139/humans/x/evm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // GetParams returns the total set of evm parameters.

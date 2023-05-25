@@ -3,7 +3,7 @@ package config
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	humans "github.com/0x4139/humans/types"
+	humans "github.com/humansdotai/humans/types"
 )
 
 const (

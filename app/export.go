@@ -13,7 +13,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/0x4139/humans/encoding"
+	"github.com/humansdotai/humans/encoding"
 )
 
 // NewDefaultGenesisState generates the default state for the application.

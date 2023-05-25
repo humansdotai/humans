@@ -5,7 +5,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/0x4139/humans/x/evm/types"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // NewHandler returns a handler for Humans type messages.

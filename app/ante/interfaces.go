@@ -11,10 +11,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/0x4139/humans/x/evm/statedb"
-	evmtypes "github.com/0x4139/humans/x/evm/types"
-	evm "github.com/0x4139/humans/x/evm/vm"
-	feemarkettypes "github.com/0x4139/humans/x/feemarket/types"
+	"github.com/humansdotai/humans/x/evm/statedb"
+	evmtypes "github.com/humansdotai/humans/x/evm/types"
+	evm "github.com/humansdotai/humans/x/evm/vm"
+	feemarkettypes "github.com/humansdotai/humans/x/feemarket/types"
 )
 
 // DynamicFeeEVMKeeper is a subset of EVMKeeper interface that supports dynamic fee checker

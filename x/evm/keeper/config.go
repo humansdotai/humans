@@ -4,12 +4,12 @@ import (
 	"math/big"
 
 	errorsmod "cosmossdk.io/errors"
-	"github.com/0x4139/humans/x/evm/statedb"
-	"github.com/0x4139/humans/x/evm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/humansdotai/humans/x/evm/statedb"
+	"github.com/humansdotai/humans/x/evm/types"
 )
 
 // EVMConfig creates the EVMConfig based on current state

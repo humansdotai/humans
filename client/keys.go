@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	clientkeys "github.com/0x4139/humans/client/keys"
-	"github.com/0x4139/humans/crypto/hd"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
+	clientkeys "github.com/humansdotai/humans/client/keys"
+	"github.com/humansdotai/humans/crypto/hd"
 )
 
 // KeyCommands registers a sub-tree of commands to interact with

@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/0x4139/humans/x/feemarket/types"
+	"github.com/humansdotai/humans/x/feemarket/types"
 
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
